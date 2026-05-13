@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Doneer{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/doneer.css') }}">
+
+<div class="doneer-wrapper">
+
+  <h1>❤️ Doneer</h1>
+
+  <form method="POST" action="/doneer">
+    <label>Naam</label>
+    <input type="text" name="naam" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label> Bepaal zelf jouw bijdrage 💜</label>
+    <div class="bedrag-invoer">
+      <span>€</span>
+      <input type="text" name="eigen_bedrag" placeholder="bijv. 15">
+    </div>
+
+    <label>Bericht (optioneel) 💬</label>
+    <textarea name="bericht" rows="3" placeholder="Schrijf hier een berichtje..."></textarea>
+
+    <button type="submit">Verder naar betalen →</button>
+  </form>
+
+</div>
+
+{% endblock %}

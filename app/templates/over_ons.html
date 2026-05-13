@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Over ons - Little Wings{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <div class="about-header">
+        <div class="logo-wrapper">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Little Wings Logo" class="logo">
+        </div>
+        <div class="title-wrapper">
+            <h1>LITTLE WINGS</h1>
+            <p class="tagline">Play · Heal · Fly</p>
+        </div>
+    </div>
+
+    <div class="about-content">
+        <div class="about-card">
+            <div class="card-icon">🌸</div>
+            <h2>Wie zijn wij?</h2>
+            <p>Little Wings is een initiatief dat kinderen in moeilijke situaties ondersteunt. Wij geloven dat creativiteit, kunst en muziek helpen bij het helen van trauma's.</p>
+        </div>
+
+        <div class="about-card">
+            <div class="card-icon">💫</div>
+            <h2>Wat doen wij?</h2>
+            <p>Eén uur is genoeg om de dag van een kind te veranderen. Door spel, muziek en creatieve activiteiten creëren we veilige ruimtes waar kinderen zich vrij voelen.</p>
+        </div>
+
+        <div class="shop-card">
+            <h2>🛍️ Steun ons</h2>
+            <p><strong>Koop een shirt, steun een kind.</strong> Elke aankoop gaat rechtstreeks naar kinderen die getroffen zijn door oorlog over de hele wereld.</p>
+            <div class="shop-buttons">
+                <a href="{{ url_for('shop') }}" class="btn btn-primary">
+                    <span>Bekijk de collectie</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+                <a href="{{ url_for('doneer') }}" class="btn btn-secondary">
+                    <span>Doneer direct</span>
+                    <span class="btn-arrow">❤️</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-content">
+                <h2>📱 Volg onze reis</h2>
+                <p>Blijf op de hoogte van onze missie en ontdek hoe jij kunt bijdragen</p>
+                <a href="https://www.instagram.com/littlewings.heal?igsh=cW5xN245b3NjeHM=" target="_blank" class="instagram-btn">
+                    <svg class="instagram-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.584.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                    </svg>
+                    @littlewings.heal
+                    <span class="arrow-icon">↗</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

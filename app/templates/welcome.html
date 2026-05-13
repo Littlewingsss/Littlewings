@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="icon"  href="{{ url_for('static', filename='img/logo.jpg')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Wings — Welkom</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="welcome-page">
+        <div class="welcome-login-box">
+            <div class="welcome-header">
+                <img  src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Little Wings"/>
+                <h1>LITTLE <span>WINGS</span></h1>
+                <p>PLAY · HEAL · FLY</p>
+            </div>
+            <div class="mission">
+                <p>🕊️ Met elke aankoop steun je <strong>kinderen getroffen door oorlog</strong> over de hele wereld — samen geven we hen vleugels.</p>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-bericht flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="inreg-tabel">
+                <div class="auth-tabs">
+                    <button class="auth-tab on" onclick="switchTab('login', this)">Inloggen</button>
+                    <button class="auth-tab" onclick="switchTab('register', this)">Registreren</button>
+                </div>
+                <div class="form-wrap">
+                    <form class="auth-form on" id="loginForm" action="{{ url_for('login') }}" method="POST">
+                        
+                        <label>E-mailadres</label>
+                        <input type="email" name="email" placeholder="jouw@email.nl" required/>
+                        <label>Wachtwoord</label>
+                        <input type="password" name="password" placeholder="••••••••" required/>
+                        <button type="submit" class="auth-submit">Inloggen</button>
+                    </form>
+                    <form class="auth-form" id="registerForm" action="{{ url_for('register') }}" method="POST">
+                        
+                        <label>Gebruikersnaam</label>
+                        <input type="text" name="username" placeholder="Jouw gebruikersnaam" required/>
+                        <label>E-mailadres</label>
+                        <input type="email" name="email" placeholder="jouw@email.nl" required/>
+                        <label>Wachtwoord</label>
+                        <input type="password" name="password" placeholder="Kies een wachtwoord" required/>
+                        <label>Bevestig wachtwoord</label>
+                        <input type="password" name="confirm_password" placeholder="Herhaal je wachtwoord" required/>
+                        <button type="submit" class="auth-submit">Account aanmaken</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function switchTab(tab, btn) {
+        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('on'));
+        document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('on'));
+        btn.classList.add('on');
+        document.getElementById(tab + 'Form').classList.add('on');
+    }
+    </script>
+
+</body>
+</html>

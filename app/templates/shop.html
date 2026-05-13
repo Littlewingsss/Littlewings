@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Shop — Little Wings{% endblock %}
+
+{% block content %}
+
+<section class="shop-hero">
+  <div class="shop-hero-circles">
+    <div class="sh-circle sh-circle-1"></div>
+    <div class="sh-circle sh-circle-2"></div>
+    <div class="sh-circle sh-circle-3"></div>
+  </div>
+  <div class="shop-hero-content">
+    <span class="shop-badge">Onze collectie</span>
+    <h1 class="shop-hero-title">Little Wings <span>Shop</span></h1>
+    <p class="shop-hero-sub">Elk product draagt bij aan onze missie - samen sterker</p>
+  </div>
+</section>
+
+<section class="shop-sectie">
+  <div class="shop-grid">
+    {% for product in producten %}
+    <div class="product-kaart">
+
+      <div class="product-img-wrap">
+        <img src="{{ url_for('static', filename='img/' + product.foto) }}" alt="{{ product.naam }}">
+         
+
+        {% if product.voorraad <= 3 and product.voorraad > 0 %}
+          <span class="product-badge badge-laag">Bijna op!</span>
+        {% elif product.voorraad == 0 %}
+          <span class="product-badge badge-uit">Uitverkocht</span>
+        {% endif %}
+      </div>
+
+      <div class="product-info">
+        <h2 class="product-naam">{{ product.naam }}</h2>
+
+        {% if product.beschrijving %}
+          <p class="product-beschrijving">{{ product.beschrijving }}</p>
+        {% endif %}
+
+        <div class="product-footer">
+          <span class="prijs">€ {{ "%.2f"|format(product.prijs) }}</span>
+
+          <form action="{{ url_for('toevoegen', product_id=product.id) }}" method="POST">
+            <button 
+              type="submit"
+              class="knop-bestellen {% if product.voorraad == 0 %}uitverkocht{% endif %}"
+              {% if product.voorraad == 0 %}disabled{% endif %}
+            >
+              {% if product.voorraad == 0 %}
+                Uitverkocht
+              {% else %}
+                Toevoegen
+              {% endif %}
+            </button>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+    {% else %}
+    <div class="shop-leeg">
+      <p>Er zijn nog geen producten beschikbaar.</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="shop-missie">
+  <div class="shop-missie-inner">
+    <span class="missie-icon">💜</span>
+    <div>
+      <h3>Elke aankoop telt</h3>
+      <p>De opbrengst van de shop gaat direct naar onze projecten voor kinderen en jongeren.</p>
+    </div>
+    <a href="{{ url_for('doneer') }}" class="knop-teal">Doneer ook</a>
+  </div>
+</section>
+
+
+
+{% endblock %}

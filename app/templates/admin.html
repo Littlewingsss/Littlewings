@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel – Little Wings{% endblock %}
+
+{% block content %}
+
+<div class="admin-wrap">
+
+  <div class="admin-header">
+    <span style="font-size:2rem">🛠️</span>
+    <div>
+      <h1>Admin Dashboard</h1>
+      <div style="font-size:.9rem;opacity:.85">Little Wings beheerPanel</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="num">{{ producten|length }}</div>
+      <div class="lbl">Producten</div>
+    </div>
+    <div class="stat-box">
+      <div class="num">{{ orders|length }}</div>
+      <div class="lbl">Orders</div>
+    </div>
+    <div class="stat-box" style="border-color:var(--teal)">
+      <div class="num" style="color:var(--teal)">{{ producten|selectattr('voorraad','eq',0)|list|length }}</div>
+      <div class="lbl">Uitverkocht</div>
+    </div>
+    <div class="stat-box" style="border-color:var(--gold)">
+      <div class="num" style="color:#b8860b">{{ donaties|length }}</div>
+      <div class="lbl">Donaties</div>
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <a href="#producten" class="admin-tab {% if tab == 'producten' or not tab %}active{% endif %}">📦 Producten</a>
+    <a href="#orders" class="admin-tab {% if tab == 'orders' %}active{% endif %}">🛒 Orders</a>
+    <a href="#donaties" class="admin-tab {% if tab == 'donaties' %}active{% endif %}">💜 Donaties</a>
+    <a href="#nieuw" class="admin-tab {% if tab == 'nieuw' %}active{% endif %}">➕ Nieuw product</a>
+  </div>
+
+  <!-- ======== PRODUCTEN ======== -->
+  <div id="producten" class="admin-section">
+    <div class="admin-card">
+      <h2>📦 Alle producten</h2>
+      {% if producten %}
+      <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th><th>Naam</th><th>Prijs</th><th>Voorraad</th><th>Status</th><th>Acties</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in producten %}
+
+            {% if edit_id == p.id %}
+            
+            <tr class="edit-form-row">
+              <td colspan="6">
+                <strong style="color:var(--primary);display:block;margin-bottom:.8rem">✏️ Product #{{ p.id }} wijzigen</strong>
+                <form method="POST" action="{{ url_for('admin_wijzig_product', product_id=p.id) }}" class="admin-form">
+                  <div class="form-row">
+                    <div>
+                      <label>Naam</label>
+                      <input type="text" name="naam" value="{{ p.naam }}" required>
+                    </div>
+                    <div>
+                      <label>Prijs (€)</label>
+                      <input type="number" name="prijs" step="0.01" min="0" value="{{ '%.2f'|format(p.prijs) }}" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div>
+                      <label>Voorraad</label>
+                      <input type="number" name="voorraad" min="0" value="{{ p.voorraad }}">
+                    </div>
+                    <div>
+                      <label>Foto (bestandsnaam)</label>
+                      <input type="text" name="foto" value="{{ p.foto or '' }}" placeholder="bijv. hoodie.png">
+                    </div>
+                  </div>
+                  <div>
+                    <label>Beschrijving</label>
+                    <textarea name="beschrijving" rows="2">{{ p.beschrijving or '' }}</textarea>
+                  </div>
+                  <div style="display:flex;gap:.5rem;margin-top:.3rem;flex-wrap:wrap">
+                    <button type="submit" class="btn-primary">💾 Opslaan</button>
+                    <a href="{{ url_for('admin') }}" class="btn-warning">✕ Annuleer</a>
+                  </div>
+                </form>
+              </td>
+            </tr>
+
+            {% else %}
+            
+            <tr>
+              <td>#{{ p.id }}</td>
+              <td>
+                <strong>{{ p.naam }}</strong>
+                {% if p.beschrijving %}
+                  <br><small style="color:var(--text-light)">{{ p.beschrijving[:60] }}{% if p.beschrijving|length > 60 %}…{% endif %}</small>
+                {% endif %}
+              </td>
+              <td>€{{ '%.2f'|format(p.prijs) }}</td>
+              <td>{{ p.voorraad }}</td>
+              <td>
+                {% if p.voorraad == 0 %}
+                  <span class="badge-uitverkocht">Uitverkocht</span>
+                {% else %}
+                  <span class="badge-beschikbaar">Beschikbaar</span>
+                {% endif %}
+              </td>
+              <td>
+                <div class="actions">
+                  <a href="{{ url_for('admin', edit_id=p.id) }}#producten" class="btn-warning">✏️ Wijzig</a>
+
+                  <form method="POST" action="{{ url_for('admin_uitverkocht', product_id=p.id) }}">
+                    {% if p.voorraad == 0 %}
+                      <button type="submit" class="btn-groen">✅ Herstel</button>
+                    {% else %}
+                      <button type="submit" class="btn-oranje">🚫 Uitverkocht</button>
+                    {% endif %}
+                  </form>
+
+                  <form method="POST" action="{{ url_for('admin_verwijder_product', product_id=p.id) }}">
+                    <button type="submit" class="btn-danger">🗑️</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endif %}
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <p style="color:var(--text-light);text-align:center;padding:2rem">
+          Nog geen producten. <a href="#nieuw" style="color:var(--primary)">Voeg er één toe ➕</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ======== ORDERS ======== -->
+  <div id="orders" class="admin-section">
+    <div class="admin-card">
+      <h2>🛒 Alle orders</h2>
+      {% if orders %}
+      <div style="overflow-x:auto">
+        {% for order in orders %}
+        <div style="border:1px solid var(--border);border-radius:10px;margin-bottom:1.5rem;overflow:hidden">
+          <!-- Order header -->
+          <div style="background:var(--surface);padding:.9rem 1.2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+            <div>
+              <strong style="color:var(--primary);font-size:1.05rem">Order #{{ order.id }}</strong>
+              &nbsp;·&nbsp;
+              <strong>{{ order.klant_naam }}</strong>
+              &nbsp;·&nbsp;
+              <a href="mailto:{{ order.klant_email }}" style="color:var(--text-light)">{{ order.klant_email }}</a>
+            </div>
+            <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap">
+              <span style="color:var(--text-light);font-size:.85rem">{{ order.besteld_op.strftime('%d-%m-%Y %H:%M') }}</span>
+              <span class="badge-beschikbaar">Nieuw</span>
+              <form method="POST" action="{{ url_for('admin_verwijder_order', order_id=order.id) }}"> 
+                <button type="submit" class="btn-danger">🗑️ Verwijder</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Order details + producten -->
+          <div style="padding:1rem 1.2rem;display:flex;flex-wrap:wrap;gap:1.5rem">
+
+            <!-- Klantinfo -->
+            <div style="min-width:200px;flex:1">
+              <div style="font-size:.8rem;color:var(--text-light);margin-bottom:.4rem;font-weight:600;text-transform:uppercase">Klantgegevens</div>
+              {% if order.telefoon %}<div>📞 {{ order.telefoon }}</div>{% endif %}
+              {% if order.straat %}
+              <div>📍 {{ order.straat }}, {{ order.postcode }} {{ order.stad }}</div>
+              <div>{{ order.land or '' }}</div>
+              {% endif %}
+              <div style="margin-top:.5rem">📦 {{ order.verzendmethode or '-' }} &nbsp;|&nbsp; 💳 {{ order.betaalmethode or '-' }}</div>
+            </div>
+
+            <!-- Producten in deze order -->
+            <div style="flex:2;min-width:260px">
+              <div style="font-size:.8rem;color:var(--text-light);margin-bottom:.4rem;font-weight:600;text-transform:uppercase">Producten</div>
+              <table style="width:100%;border-collapse:collapse">
+                <thead>
+                  <tr style="font-size:.82rem;color:var(--text-light)">
+                    <th style="text-align:left;padding:.3rem .5rem">Product</th>
+                    <th style="text-align:center;padding:.3rem .5rem">Aantal</th>
+                    <th style="text-align:right;padding:.3rem .5rem">Stukprijs</th>
+                    <th style="text-align:right;padding:.3rem .5rem">Subtotaal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for regel in order.regels %}
+                  <tr style="border-top:1px solid var(--border)">
+                    <td style="padding:.4rem .5rem">{{ regel.product.naam if regel.product else '(verwijderd)' }}</td>
+                    <td style="text-align:center;padding:.4rem .5rem">{{ regel.aantal }}×</td>
+                    <td style="text-align:right;padding:.4rem .5rem">€{{ '%.2f'|format(regel.prijs_per_stuk) }}</td>
+                    <td style="text-align:right;padding:.4rem .5rem">€{{ '%.2f'|format(regel.prijs_per_stuk * regel.aantal) }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr style="border-top:2px solid var(--border);font-weight:700">
+                    <td colspan="3" style="text-align:right;padding:.5rem .5rem">Totaal:</td>
+                    <td style="text-align:right;padding:.5rem .5rem;color:var(--primary)">€{{ '%.2f'|format(order.totaal()) }}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+        <p style="color:var(--text-light);text-align:center;padding:2rem">Nog geen orders.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ======== NIEUW PRODUCT ======== -->
+   <!-- ======== DONATIES ======== -->
+  <div id="donaties" class="admin-section">
+    <div class="admin-card">
+      <h2>💜 Alle donaties</h2>
+      {% if donaties %}
+      <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th><th>Naam</th><th>E-mail</th><th>Bedrag</th><th>Bericht</th><th>Datum</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for d in donaties %}
+            <tr>
+              <td>#{{ d.id }}</td>
+              <td>{{ d.naam }}</td>
+              <td><a href="mailto:{{ d.email }}" style="color:var(--text-light)">{{ d.email }}</a></td>
+              <td style="color:#b8860b; font-weight:700">€ {{ "%.2f"|format(d.bedrag) }}</td>
+              <td style="color:var(--text-light); font-size:.9rem">{{ d.bericht or '—' }}</td>
+              <td style="font-size:.85rem">{{ d.gedoneerd_op.strftime('%d-%m-%Y %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+            <tr style="font-weight:800; border-top:2px solid var(--border)">
+              <td colspan="3" style="text-align:right; padding:.5rem">Totaal ontvangen:</td>
+              <td style="color:var(--primary)">€ {{ "%.2f"|format(donaties|sum(attribute='bedrag')) }}</td>
+              <td colspan="2"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <p style="color:var(--text-light);text-align:center;padding:2rem">Er zijn nog geen donaties ontvangen.</p>
+      {% endif %}
+    </div>
+  </div>
+  <div id="nieuw" class="admin-section">
+    <div class="admin-card">
+      <h2>➕ Nieuw product toevoegen</h2>
+      <form method="POST" action="{{ url_for('admin_add_product') }}" class="admin-form">
+        <div>
+          <label>Productnaam *</label>
+          <input type="text" name="naam" required placeholder="bijv. Gano7 Hoodie">
+        </div>
+        <div>
+          <label>Beschrijving</label>
+          <textarea name="beschrijving" rows="3" placeholder="Omschrijving van het product…"></textarea>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Prijs (€) *</label>
+            <input type="number" name="prijs" step="0.01" min="0" required placeholder="0.00">
+          </div>
+          <div>
+            <label>Voorraad</label>
+            <input type="number" name="voorraad" min="0" value="0">
+          </div>
+        </div>
+        <div>
+          <label>Foto bestandsnaam (in /static/img/)</label>
+          <input type="text" name="foto" placeholder="bijv. hoodie.png">
+        </div>
+        <button type="submit" class="btn-primary" style="justify-self:start;margin-top:.5rem">
+          ➕ Product toevoegen
+        </button>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Winkelwagen — Little Wings{% endblock %}
+
+{% block content %}
+
+<section class="shop-hero">
+  <div class="shop-hero-circles">
+    <div class="sh-circle sh-circle-1"></div>
+    <div class="sh-circle sh-circle-2"></div>
+    <div class="sh-circle sh-circle-3"></div>
+  </div>
+  <div class="shop-hero-content">
+    <span class="shop-badge">Jouw selectie</span>
+    <h1 class="shop-hero-title">🛒 Winkel<span>wagen</span></h1>
+    <p class="shop-hero-sub">Bekijk en beheer je gekozen producten</p>
+  </div>
+</section>
+
+<section class="ww-sectie">
+  <div class="ww-container">
+
+    {% if items %}
+      <div id="ww-items">
+
+        {% for item in items %}
+        <div class="ww-item">
+
+          <!-- LINKERKANT -->
+          <div class="ww-item-left">
+            {% if item.product.foto %}
+              <img src="{{ url_for('static', filename='img/' + item.product.foto) }}" alt="{{ item.product.naam }}">
+            {% endif %}
+
+            <div class="ww-item-info">
+              <h3>{{ item.product.naam }}</h3>
+
+              <div class="ww-aantal">
+                <form action="{{ url_for('verminderen', product_id=item.product.id) }}" method="POST">
+                  <button type="submit" class="knop-min">−</button>
+                </form>
+
+                <span>{{ item.aantal }}</span>
+
+                <form action="{{ url_for('verhogen', product_id=item.product.id) }}" method="POST">
+                  <button type="submit" class="knop-plus">+</button>
+                </form>
+              </div>
+
+              <p>× € {{ "%.2f"|format(item.product.prijs) }}</p>
+            </div>
+          </div>
+
+          <!-- RECHTERKANT -->
+          <div class="ww-item-right">
+            <span class="ww-item-subtotaal">
+              € {{ "%.2f"|format(item.subtotaal) }}
+            </span>
+
+            <form action="{{ url_for('verwijderen', product_id=item.product.id) }}" method="POST">
+              <button type="submit" class="knop-verwijder">🗑</button>
+            </form>
+          </div>
+
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <!-- Blijf winkelen knop -->
+      <div style="text-align:right; margin: .5rem 0 1rem;">
+        <a href="{{ url_for('shop') }}" class="knop-blijf-winkelen">← Verder winkelen</a>
+      </div>
+
+<!-- TOTAAL MET VERZENDKOSTEN -->
+      <div class="ww-totaal-balk">
+        <div style="display:flex; flex-direction:column; gap:.4rem; width:100%">
+          <div style="display:flex; justify-content:space-between; color:#888; font-size:.9rem">
+            <span>Subtotaal</span>
+            <span>€ {{ totaal_str }}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; color:#888; font-size:.9rem">
+            <span>Verzendkosten</span>
+            <span>{{ verzend_str }}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.1rem; border-top:2px solid #e8e0f5; padding-top:.6rem; margin-top:.2rem">
+            <span>Totaal</span>
+            <strong style="color:#7c3aed">€ {{ totaal_incl_str }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="ww-bestel-form">
+        <h3>Jouw gegevens</h3>
+
+        <form action="{{ url_for('bestelling') }}" method="POST">
+
+          <label>Naam</label>
+          <input type="text" name="klant_naam" placeholder="Voornaam Achternaam" required>
+
+          <label>E-mailadres</label>
+          <input type="email" name="klant_email" placeholder="jouw@email.nl" required>
+
+          <label>Telefoonnummer</label>
+          <input type="tel" name="telefoon" placeholder="bijv. 06 12345678" required>
+
+          <label>Straat en huisnummer</label>
+          <input type="text" name="straat" placeholder="bijv. Hoofdstraat 12" required>
+
+          <label>Postcode</label>
+          <input type="text" name="postcode" placeholder="bijv. 1234 AB" required>
+
+          <label>Stad</label>
+          <input type="text" name="stad" placeholder="bijv. Amsterdam" required>
+
+          <label>Land</label>
+          <select name="land" required>
+            <option value="">Kies een land</option>
+            <option value="nederland">🇳🇱 Nederland</option>
+            <option value="belgie">🇧🇪 België</option>
+            <option value="duitsland">🇩🇪 Duitsland</option>
+          </select>
+
+          <label>Verzendmethode</label>
+          <select name="verzending" required onchange="this.form.submit()">
+            <option value="">Kies verzending</option>
+            <option value="standaard" {% if gekozen_verzending == 'standaard' %}selected{% endif %}>📦 Standaard (3-5 dagen) — Gratis</option>
+            <option value="express" {% if gekozen_verzending == 'express' %}selected{% endif %}>🚀 Express (1-2 dagen) — €4,99</option>
+            <option value="ophalen" {% if gekozen_verzending == 'ophalen' %}selected{% endif %}>🏪 Ophalen — Gratis</option>
+          </select>
+
+          <button type="submit" class="bestel-submit">
+            Verder naar betalen →
+          </button>
+
+        </form>
+      </div>
+
+    {% else %}
+      <div class="ww-leeg">
+        <p>Je winkelwagen is leeg.</p>
+        <a href="{{ url_for('shop') }}" class="knop-teal">🛍️ Naar de shop</a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

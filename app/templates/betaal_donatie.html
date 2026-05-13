@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Betalen — Little Wings{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/betaal_donatie.css') }}">
+
+<div class="betaal-page">
+  <div class="betaal-card">
+
+    <div class="betaal-header">
+      <span class="heart-icon">💜</span>
+      <h1>Jouw donatie</h1>
+      <p>Controleer je gegevens en kies een betaalmethode</p>
+    </div>
+
+    <div class="donatie-overzicht">
+      <div>
+        <div class="do-naam">{{ naam }}</div>
+        <div class="do-email">{{ email }}</div>
+      </div>
+      <div class="do-bedrag">€{{ bedrag }}</div>
+    </div>
+
+    <form method="POST" action="{{ url_for('donatie_bevestig') }}">
+      <input type="hidden" name="naam" value="{{ naam }}">
+      <input type="hidden" name="email" value="{{ email }}">
+      <input type="hidden" name="bedrag" value="{{ bedrag }}">
+
+      <div class="betaal-methoden">
+        <h3>Betaalmethode</h3>
+        <div class="methode-opties">
+
+          <label class="methode-optie">
+            <input type="radio" name="betaalmethode" value="ideal"
+              {% if betaalmethode == 'ideal' %}checked{% endif %} required>
+            <img src="{{ url_for('static', filename='img/ideal-logo.png') }}" alt="iDEAL" class="methode-logo">
+            <div>
+              <div class="methode-naam">iDEAL</div>
+              <div class="methode-sub">Betaal via jouw bank</div>
+            </div>
+          </label>
+
+          <label class="methode-optie">
+            <input type="radio" name="betaalmethode" value="creditcard"
+              {% if betaalmethode == 'creditcard' %}checked{% endif %}>
+            <img src="{{ url_for('static', filename='img/creditcard-logo.png') }}" alt="Creditcard" class="methode-logo">
+            <div>
+              <div class="methode-naam">Creditcard</div>
+              <div class="methode-sub">Visa / Mastercard</div>
+            </div>
+          </label>
+
+          <label class="methode-optie">
+            <input type="radio" name="betaalmethode" value="paypal"
+              {% if betaalmethode == 'paypal' %}checked{% endif %}>
+            <img src="{{ url_for('static', filename='img/paypal-logo.png') }}" alt="PayPal" class="methode-logo">
+            <div>
+              <div class="methode-naam">PayPal</div>
+              <div class="methode-sub">Betaal met je PayPal account</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <button type="submit" class="betaal-knop">
+        💜 Bevestig donatie van €{{ bedrag }}
+      </button>
+
+    </form>
+
+    <a href="{{ url_for('doneer') }}" class="terug-link">← Terug naar donatiepagina</a>
+
+    <div class="veilig-badge">
+      🔒 Veilig en versleuteld betalen
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Little Wings — Home{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTIE -->
+<div class="hero">
+    <div class="hero-circles">
+        <div class="circle circle-left"></div>
+        <div class="circle circle-right"></div>
+    </div>
+    <div class="hero-content">
+        <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Little Wings logo" class="hero-logo"/>
+        <h1 class="hero-title">LITTLE <span>WINGS</span></h1>
+        <p class="hero-subtitle">Play · Heal · Fly</p>
+        <p class="hero-tekst">Koop een shirt, steun een kind. Elke aankoop gaat rechtstreeks naar kinderen die getroffen zijn door oorlog over de hele wereld.</p>
+        <div class="hero-knoppen">
+            <a href="{{ url_for('shop') }}" class="knop-teal">🛍️ Bekijk de collectie</a>
+            <a href="{{ url_for('doneer') }}" class="knop-outline">❤️ Doneer direct</a>
+        </div>
+    </div>
+</div>
+
+<!-- KENMERKEN BALK -->
+<div class="kenmerken">
+    <div class="kenmerk"><span class="dot teal"></span> 100% winst naar kinderen</div>
+    <div class="kenmerk"><span class="dot oranje"></span> Gratis verzending</div>
+    <div class="kenmerk"><span class="dot goud"></span> Duurzame materialen</div>
+    <div class="kenmerk"><span class="dot blauw"></span> Wereldwijde impact</div>
+</div>
+
+<!-- MISSIE SECTIE -->
+<div class="missie-sectie">
+    <h2>Onze missie</h2>
+    <p>Wij geloven dat elk kind recht heeft op een veilige en gelukkige jeugd.</p>
+</div>
+
+{% endblock %}

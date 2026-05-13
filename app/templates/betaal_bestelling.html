@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Betalen — Little Wings{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/betaal_bestelling.css') }}">
+
+<div class="betaal-page">
+  <div class="betaal-card">
+
+    <div class="betaal-header">
+      <span class="cart-icon">🛒</span>
+      <h1>Jouw bestelling</h1>
+      <p>Controleer je gegevens en kies een betaalmethode</p>
+    </div>
+
+    <div class="donatie-overzicht">
+      <div>
+        <div class="do-naam">{{ klant_naam }}</div>
+        <div class="do-email">{{ klant_email }}</div>
+      </div>
+      <div class="do-bedrag">€{{ totaal_str }}</div>
+    </div>
+
+    <!-- Producten overzicht -->
+    <div class="producten-lijst">
+      {% for item in items %}
+      <div class="product-rij">
+        <span>{{ item.product.naam }} × {{ item.aantal }}</span>
+        <span>€{{ "%.2f"|format(item.subtotaal) }}</span>
+      </div>
+      {% endfor %}
+      
+      <div class="verzending-rij">
+        <span>Verzending</span>
+        <span>{{ verzending }}</span>
+      </div>
+      
+      <div class="totaal-rij">
+        <span class="label">Totaal</span>
+        <span class="waarde">€{{ totaal_str }}</span>
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('bestelling_bevestig') }}">
+      <input type="hidden" name="klant_naam" value="{{ klant_naam }}">
+      <input type="hidden" name="klant_email" value="{{ klant_email }}">
+      <input type="hidden" name="telefoon" value="{{ telefoon }}">
+      <input type="hidden" name="straat" value="{{ straat }}">
+      <input type="hidden" name="postcode" value="{{ postcode }}">
+      <input type="hidden" name="stad" value="{{ stad }}">
+      <input type="hidden" name="land" value="{{ land }}">
+      <input type="hidden" name="verzending" value="{{ verzending }}">
+
+      <div class="betaal-methoden">
+        <h3>Betaalmethode</h3>
+        <div class="methode-opties">
+
+          <label class="methode-optie">
+            <input type="radio" name="betaalmethode" value="ideal" required>
+            <img src="{{ url_for('static', filename='img/ideal-logo.png') }}" alt="iDEAL" class="methode-logo">
+            <div>
+              <div class="methode-naam">iDEAL</div>
+              <div class="methode-sub">Betaal via jouw bank</div>
+            </div>
+          </label>
+
+          <label class="methode-optie">
+            <input type="radio" name="betaalmethode" value="creditcard">
+            <img src="{{ url_for('static', filename='img/creditcard-logo.png') }}" alt="Creditcard" class="methode-logo">
+            <div>
+              <div class="methode-naam">Creditcard</div>
+              <div class="methode-sub">Visa / Mastercard</div>
+            </div>
+          </label>
+
+          <label class="methode-optie">
+            <input type="radio" name="betaalmethode" value="paypal">
+            <img src="{{ url_for('static', filename='img/paypal-logo.png') }}" alt="PayPal" class="methode-logo">
+            <div>
+              <div class="methode-naam">PayPal</div>
+              <div class="methode-sub">Betaal met je PayPal account</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <button type="submit" class="betaal-knop">
+        ✅ Betaal €{{ totaal_str }}
+      </button>
+
+    </form>
+
+    <a href="{{ url_for('winkelwagen') }}" class="terug-link">← Terug naar winkelwagen</a>
+
+    <div class="veilig-badge">
+      🔒 Veilig en versleuteld betalen
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
