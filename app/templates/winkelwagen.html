@@ -36,13 +36,17 @@
               <h3>{{ item.product.naam }}</h3>
 
               <div class="ww-aantal">
+                <!-- FIX: CSRF token toegevoegd -->
                 <form action="{{ url_for('verminderen', product_id=item.product.id) }}" method="POST">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button type="submit" class="knop-min">−</button>
                 </form>
 
                 <span>{{ item.aantal }}</span>
 
+                <!-- FIX: CSRF token toegevoegd -->
                 <form action="{{ url_for('verhogen', product_id=item.product.id) }}" method="POST">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button type="submit" class="knop-plus">+</button>
                 </form>
               </div>
@@ -57,7 +61,9 @@
               € {{ "%.2f"|format(item.subtotaal) }}
             </span>
 
+            <!-- FIX: CSRF token toegevoegd -->
             <form action="{{ url_for('verwijderen', product_id=item.product.id) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
               <button type="submit" class="knop-verwijder">🗑</button>
             </form>
           </div>
@@ -72,7 +78,7 @@
         <a href="{{ url_for('shop') }}" class="knop-blijf-winkelen">← Verder winkelen</a>
       </div>
 
-<!-- TOTAAL MET VERZENDKOSTEN -->
+      <!-- TOTAAL MET VERZENDKOSTEN -->
       <div class="ww-totaal-balk">
         <div style="display:flex; flex-direction:column; gap:.4rem; width:100%">
           <div style="display:flex; justify-content:space-between; color:#888; font-size:.9rem">
@@ -94,7 +100,9 @@
       <div class="ww-bestel-form">
         <h3>Jouw gegevens</h3>
 
+        <!-- FIX: CSRF token toegevoegd -->
         <form action="{{ url_for('bestelling') }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
           <label>Naam</label>
           <input type="text" name="klant_naam" placeholder="Voornaam Achternaam" required>
