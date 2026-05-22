@@ -11,7 +11,9 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = 'echtgeheim'
+    # ✅ FIX: laad de SECRET_KEY uit de omgeving, nooit hardcoded
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(32))
+
     basedir = os.path.abspath(os.path.dirname(__file__))
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
 
@@ -22,6 +24,5 @@ def create_app():
 
     from app import routes
     routes.init_app(app)
-    
 
     return app
