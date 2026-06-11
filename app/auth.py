@@ -8,7 +8,7 @@ def admin_required(functie):
     @wraps(functie)
     def check(**url_waarde):
         if not current_user.is_authenticated:
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         if current_user.email not in ADMIN_EMAILS:
             abort(403)
         return functie(**url_waarde)

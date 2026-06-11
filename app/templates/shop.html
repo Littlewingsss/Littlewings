@@ -43,7 +43,7 @@
         <div class="product-footer">
           <span class="prijs">€ {{ "%.2f"|format(product.prijs) }}</span>
 
-          <form action="{{ url_for('toevoegen', product_id=product.id) }}" method="POST">
+          <form action="{{ url_for('shop.toevoegen', product_id=product.id) }}" method="POST">
             <button 
               type="submit"
               class="knop-bestellen {% if product.voorraad == 0 %}uitverkocht{% endif %}"
@@ -76,7 +76,7 @@
       <h3>Elke aankoop telt</h3>
       <p>De opbrengst van de shop gaat direct naar onze projecten voor kinderen en jongeren.</p>
     </div>
-    <a href="{{ url_for('doneer') }}" class="knop-teal">Doneer ook</a>
+    <a href="{{ url_for('shop.doneer') }}" class="knop-teal">Doneer ook</a>
   </div>
 </section>
 

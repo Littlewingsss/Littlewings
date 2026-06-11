@@ -21,7 +21,8 @@
       <div class="do-bedrag">€{{ bedrag }}</div>
     </div>
 
-    <form method="POST" action="{{ url_for('donatie_bevestig') }}">
+    <form method="POST" action="{{ url_for('shop.donatie_bevestig') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <input type="hidden" name="naam" value="{{ naam }}">
       <input type="hidden" name="email" value="{{ email }}">
       <input type="hidden" name="bedrag" value="{{ bedrag }}">
@@ -69,7 +70,7 @@
 
     </form>
 
-    <a href="{{ url_for('doneer') }}" class="terug-link">← Terug naar donatiepagina</a>
+    <a href="{{ url_for('shop.doneer') }}" class="terug-link">← Terug naar donatiepagina</a>
 
     <div class="veilig-badge">
       🔒 Veilig en versleuteld betalen

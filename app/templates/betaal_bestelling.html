@@ -41,7 +41,8 @@
       </div>
     </div>
 
-    <form method="POST" action="{{ url_for('bestelling_bevestig') }}">
+    <form method="POST" action="{{ url_for('shop.bestelling_bevestig') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <input type="hidden" name="klant_naam" value="{{ klant_naam }}">
       <input type="hidden" name="klant_email" value="{{ klant_email }}">
       <input type="hidden" name="telefoon" value="{{ telefoon }}">
@@ -91,7 +92,7 @@
 
     </form>
 
-    <a href="{{ url_for('winkelwagen') }}" class="terug-link">← Terug naar winkelwagen</a>
+    <a href="{{ url_for('shop.winkelwagen') }}" class="terug-link">← Terug naar winkelwagen</a>
 
     <div class="veilig-badge">
       🔒 Veilig en versleuteld betalen

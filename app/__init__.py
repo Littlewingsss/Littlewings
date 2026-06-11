@@ -21,11 +21,16 @@ def create_app():
 
     db.init_app(app)
     login_manager.init_app(app)
-    login_manager.login_view = 'index'
+    login_manager.login_view = 'auth.index'
     migrate.init_app(app, db)
     csrf.init_app(app)
 
-    from app import routes
-    routes.init_app(app)
+    from app.blueprints.auth import bp as auth_bp
+    from app.blueprints.shop import bp as shop_bp
+    from app.blueprints.admin import bp as admin_bp
+
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(shop_bp)
+    app.register_blueprint(admin_bp)
 
     return app

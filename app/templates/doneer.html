@@ -10,7 +10,8 @@
 
   <h1>❤️ Doneer</h1>
 
-  <form method="POST" action="/doneer">
+  <form method="POST" action="{{ url_for('shop.doneer') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <label>Naam</label>
     <input type="text" name="naam" required>
 

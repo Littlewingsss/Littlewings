@@ -59,7 +59,8 @@
             <tr class="edit-form-row">
               <td colspan="6">
                 <strong style="color:var(--primary);display:block;margin-bottom:.8rem">✏️ Product #{{ p.id }} wijzigen</strong>
-                <form method="POST" action="{{ url_for('admin_wijzig_product', product_id=p.id) }}" class="admin-form">
+                <form method="POST" action="{{ url_for('admin.admin_wijzig_product', product_id=p.id) }}" class="admin-form">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <div class="form-row">
                     <div>
                       <label>Naam</label>
@@ -86,7 +87,7 @@
                   </div>
                   <div style="display:flex;gap:.5rem;margin-top:.3rem;flex-wrap:wrap">
                     <button type="submit" class="btn-primary">💾 Opslaan</button>
-                    <a href="{{ url_for('admin') }}" class="btn-warning">✕ Annuleer</a>
+                    <a href="{{ url_for('admin.admin') }}" class="btn-warning">✕ Annuleer</a>
                   </div>
                 </form>
               </td>
@@ -113,9 +114,10 @@
               </td>
               <td>
                 <div class="actions">
-                  <a href="{{ url_for('admin', edit_id=p.id) }}#producten" class="btn-warning">✏️ Wijzig</a>
+                  <a href="{{ url_for('admin.admin', edit_id=p.id) }}#producten" class="btn-warning">✏️ Wijzig</a>
 
-                  <form method="POST" action="{{ url_for('admin_uitverkocht', product_id=p.id) }}">
+                  <form method="POST" action="{{ url_for('admin.admin_uitverkocht', product_id=p.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     {% if p.voorraad == 0 %}
                       <button type="submit" class="btn-groen">✅ Herstel</button>
                     {% else %}
@@ -123,7 +125,8 @@
                     {% endif %}
                   </form>
 
-                  <form method="POST" action="{{ url_for('admin_verwijder_product', product_id=p.id) }}">
+                  <form method="POST" action="{{ url_for('admin.admin_verwijder_product', product_id=p.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn-danger">🗑️</button>
                   </form>
                 </div>
@@ -163,7 +166,8 @@
             <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap">
               <span style="color:var(--text-light);font-size:.85rem">{{ order.besteld_op.strftime('%d-%m-%Y %H:%M') }}</span>
               <span class="badge-beschikbaar">Nieuw</span>
-              <form method="POST" action="{{ url_for('admin_verwijder_order', order_id=order.id) }}"> 
+              <form method="POST" action="{{ url_for('admin.admin_verwijder_order', order_id=order.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn-danger">🗑️ Verwijder</button>
               </form>
             </div>
@@ -264,7 +268,8 @@
   <div id="nieuw" class="admin-section">
     <div class="admin-card">
       <h2>➕ Nieuw product toevoegen</h2>
-      <form method="POST" action="{{ url_for('admin_add_product') }}" class="admin-form">
+      <form method="POST" action="{{ url_for('admin.admin_add_product') }}" class="admin-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div>
           <label>Productnaam *</label>
           <input type="text" name="naam" required placeholder="bijv. Gano7 Hoodie">

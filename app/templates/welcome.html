@@ -34,7 +34,7 @@
                     <button class="auth-tab" onclick="switchTab('register', this)">Registreren</button>
                 </div>
                 <div class="form-wrap">
-                    <form class="auth-form on" id="loginForm" action="{{ url_for('login') }}" method="POST">
+                    <form class="auth-form on" id="loginForm" action="{{ url_for('auth.login') }}" method="POST">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <label>E-mailadres</label>
                         <input type="email" name="email" placeholder="jouw@email.nl" required/>
@@ -42,7 +42,7 @@
                         <input type="password" name="password" placeholder="••••••••" required/>
                         <button type="submit" class="auth-submit">Inloggen</button>
                     </form>
-                    <form class="auth-form" id="registerForm" action="{{ url_for('register') }}" method="POST">
+                    <form class="auth-form" id="registerForm" action="{{ url_for('auth.register') }}" method="POST">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <label>Gebruikersnaam</label>
                         <input type="text" name="username" placeholder="Jouw gebruikersnaam" required/>
