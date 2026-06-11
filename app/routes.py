@@ -1,6 +1,6 @@
 from app import db
 from flask import current_app  
-from flask import render_template, redirect, request, url_for, flash, Response, jsonify, session
+from flask import render_template, redirect, request, url_for, flash, Response, jsonify, session, abort
 from flask_login import login_user, login_required, logout_user
 from app.models import User, Product, Order, OrderRegel
 from app.forms import LoginForm, RegistrationForm
@@ -85,7 +85,7 @@ def init_app(app):
 
     @app.route('/toevoegen/<int:product_id>', methods=['POST'])
     def toevoegen(product_id):
-        product = Product.query.get_or_404(product_id)
+        product = db.session.get(Product, product_id) or abort(404)
         winkelwagen = session.get('winkelwagen', {})
         key = str(product_id)
         huidige_aantal = winkelwagen.get(key, 0)
@@ -97,12 +97,12 @@ def init_app(app):
         winkelwagen[key] = huidige_aantal + 1
         session['winkelwagen'] = winkelwagen
         flash('Product toegevoegd aan je winkelwagen! 🛒', 'success')
-        return redirect(url_for('shop')) 
+        return redirect(url_for('shop'))
 
 
     @app.route('/verhogen/<int:product_id>', methods=['POST'])
     def verhogen(product_id):
-        product = Product.query.get_or_404(product_id)
+        product = db.session.get(Product, product_id) or abort(404)
         winkelwagen = session.get('winkelwagen', {})
         key = str(product_id)
         huidige_aantal = winkelwagen.get(key, 0)
@@ -137,7 +137,7 @@ def init_app(app):
         items = []
         totaal = 0
         for product_id, aantal in wagen.items():
-            product = Product.query.get(int(product_id))
+            product = db.session.get(Product, int(product_id))
             if product:
                 subtotaal = product.prijs * aantal
                 totaal += subtotaal
@@ -181,7 +181,7 @@ def init_app(app):
         totaal = 0
         items_snapshot = []
         for product_id, aantal in wagen.items():
-            product = Product.query.get(int(product_id))
+            product = db.session.get(Product, int(product_id))
             if product:
                 subtotaal = product.prijs * aantal
                 totaal += subtotaal
@@ -220,7 +220,7 @@ def init_app(app):
         wagen = session.get('winkelwagen', {})
         items = []
         for product_id, aantal in wagen.items():
-            product = Product.query.get(int(product_id))
+            product = db.session.get(Product, int(product_id))
             if product:
                 subtotaal = product.prijs * aantal
                 items.append({'product': product, 'aantal': aantal, 'subtotaal': subtotaal})
@@ -268,7 +268,7 @@ def init_app(app):
         db.session.add(order)
         db.session.flush()  
         for product_id, aantal in wagen.items():
-            product = Product.query.get(int(product_id))
+            product = db.session.get(Product, int(product_id))
             if product:
                 regel = OrderRegel(
                     order_id       = order.id,
@@ -395,7 +395,7 @@ def init_app(app):
     @app.route('/admin/product/<int:product_id>/wijzig', methods=['POST'])
     @admin_required
     def admin_wijzig_product(product_id):
-        product = Product.query.get_or_404(product_id)
+        product = db.session.get(Product, product_id) or abort(404)
         product.naam = request.form.get('naam')
         product.beschrijving = request.form.get('beschrijving')
         product.prijs = float(request.form.get('prijs', product.prijs))
@@ -408,7 +408,7 @@ def init_app(app):
     @app.route('/admin/product/<int:product_id>/verwijder', methods=['POST'])
     @admin_required
     def admin_verwijder_product(product_id):
-        product = Product.query.get_or_404(product_id)
+        product = db.session.get(Product, product_id) or abort(404)
         naam = product.naam
         db.session.delete(product)
         db.session.commit()
@@ -418,7 +418,7 @@ def init_app(app):
     @app.route('/admin/product/<int:product_id>/uitverkocht', methods=['POST'])
     @admin_required
     def admin_uitverkocht(product_id):
-        product = Product.query.get_or_404(product_id)
+        product = db.session.get(Product, product_id) or abort(404)
         if product.voorraad == 0:
             product.voorraad = 10
             flash(f'"{product.naam}" terug op voorraad gezet (10 stuks).', 'success')
