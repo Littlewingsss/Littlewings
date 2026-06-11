@@ -44,7 +44,8 @@
           <span class="prijs">€ {{ "%.2f"|format(product.prijs) }}</span>
 
           <form action="{{ url_for('shop.toevoegen', product_id=product.id) }}" method="POST">
-            <button 
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button
               type="submit"
               class="knop-bestellen {% if product.voorraad == 0 %}uitverkocht{% endif %}"
               {% if product.voorraad == 0 %}disabled{% endif %}
