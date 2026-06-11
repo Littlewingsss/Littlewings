@@ -1,5 +1,7 @@
+import csv
+import io
 import os
-from flask import Blueprint, render_template, redirect, request, url_for, flash, abort, current_app
+from flask import Blueprint, render_template, redirect, request, url_for, flash, abort, current_app, make_response
 from werkzeug.utils import secure_filename
 from app import db
 from app.models import Product, Order
@@ -92,6 +94,47 @@ def admin_uitverkocht(product_id):
         flash(f'"{product.naam}" gemarkeerd als uitverkocht.', 'warning')
     db.session.commit()
     return redirect(url_for('admin.admin'))
+
+
+@bp.route('/admin/orders/export')
+@admin_required
+def admin_export_orders():
+    orders = Order.query.order_by(Order.besteld_op.asc()).all()
+
+    buf = io.StringIO()
+    buf.write('﻿')  # UTF-8 BOM zodat Excel direct de juiste encoding herkent
+    writer = csv.writer(buf)
+    writer.writerow([
+        'Order ID', 'Naam', 'Email', 'Telefoon',
+        'Straat', 'Postcode', 'Stad', 'Land',
+        'Verzendmethode', 'Betaalmethode', 'Besteld op',
+        'Producten', 'Totaal (excl. verzending)',
+    ])
+    for order in orders:
+        producten_str = '; '.join(
+            f'{r.product.naam if r.product else "(verwijderd)"} x{r.aantal}'
+            for r in order.regels
+        )
+        writer.writerow([
+            order.id,
+            order.klant_naam,
+            order.klant_email,
+            order.telefoon or '',
+            order.straat or '',
+            order.postcode or '',
+            order.stad or '',
+            order.land or '',
+            order.verzendmethode or '',
+            order.betaalmethode or '',
+            order.besteld_op.strftime('%d-%m-%Y %H:%M'),
+            producten_str,
+            f'€{"%.2f" % order.totaal()}',
+        ])
+
+    response = make_response(buf.getvalue())
+    response.headers['Content-Type'] = 'text/csv; charset=utf-8'
+    response.headers['Content-Disposition'] = 'attachment; filename=bestellingen.csv'
+    return response
 
 
 @bp.route('/admin/order/<int:order_id>/verwijder', methods=['POST'])

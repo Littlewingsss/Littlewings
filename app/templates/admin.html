@@ -32,6 +32,21 @@
     </div>
   </div>
 
+  {% set lage_voorraad = producten | selectattr('voorraad', 'gt', 0) | selectattr('voorraad', 'lt', 5) | list %}
+  {% if lage_voorraad %}
+  <div style="background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:flex-start">
+    <span style="font-size:1.3rem;line-height:1">⚠️</span>
+    <div>
+      <strong style="color:#92400e">Lage voorraad</strong>
+      <ul style="margin:.35rem 0 0 1.1rem;padding:0;color:#78350f;font-size:.9rem">
+        {% for p in lage_voorraad %}
+        <li>{{ p.naam }} — nog <strong>{{ p.voorraad }}</strong> stuk{{ 'ken' if p.voorraad != 1 else '' }} over</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
   <div class="admin-tabs">
     <a href="#producten" class="admin-tab {% if tab == 'producten' or not tab %}active{% endif %}">📦 Producten</a>
     <a href="#orders" class="admin-tab {% if tab == 'orders' %}active{% endif %}">🛒 Orders</a>
@@ -153,7 +168,12 @@
   <!-- ======== ORDERS ======== -->
   <div id="orders" class="admin-section">
     <div class="admin-card">
-      <h2>🛒 Alle orders</h2>
+      <h2 style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+        <span>🛒 Alle orders</span>
+        <a href="{{ url_for('admin.admin_export_orders') }}" class="btn-primary" style="font-size:.85rem;padding:.45rem 1rem;text-decoration:none">
+          📥 Exporteer CSV
+        </a>
+      </h2>
       {% if orders %}
       <div style="overflow-x:auto">
         {% for order in orders %}
