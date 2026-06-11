@@ -47,6 +47,12 @@ def create_app():
     mail.init_app(app)
     babel.init_app(app, locale_selector=_get_locale)
 
+    # Jinja2's i18n extension does `rv % variables` after gettext, which breaks
+    # strings that contain a literal `%` (e.g. "100% profit"). Bypass it by
+    # registering Flask-Babel's own gettext/ngettext directly as Jinja2 globals.
+    from flask_babel import gettext as _gettext, ngettext as _ngettext
+    app.jinja_env.globals['_'] = _gettext
+    app.jinja_env.globals['ngettext'] = _ngettext
     app.jinja_env.globals['get_locale'] = _get_locale
 
     from app.blueprints.auth import bp as auth_bp
