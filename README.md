@@ -8,9 +8,10 @@
 
 **Little Wings** is een webshop met een missie: voor elk product dat je koopt, gaat 100% van de winst rechtstreeks naar kinderen die getroffen zijn door oorlog over de hele wereld. Eén aankoop, echte impact.
 
-[![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-2.2.5-black?logo=flask)](https://flask.palletsprojects.com)
 [![SQLite](https://img.shields.io/badge/Database-SQLite-lightblue?logo=sqlite)](https://sqlite.org)
+[![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![Instagram](https://img.shields.io/badge/Instagram-@littlewings.heal-E1306C?logo=instagram&logoColor=white)](https://www.instagram.com/littlewings.heal)
 
 </div>
@@ -28,54 +29,24 @@ Little Wings is een initiatief dat kinderen in moeilijke situaties ondersteunt. 
 ## ✨ Features
 
 - 🛍️ **Webshop** — Browse en bestel producten uit de Little Wings collectie
-- 🛒 **Winkelwagen** — Voeg producten toe en beheer je bestelling
-- 💳 **Checkout** — Bestel met keuze uit bezorgmethode en betaalmethode
+- 🛒 **Winkelwagen** — Voeg producten toe, pas aantallen aan en beheer je bestelling
+- 💳 **Checkout met validatie** — Serverside validatie van alle adresvelden en e-mailformaat
+- 📧 **Bevestigingsmail** — Klant ontvangt automatisch een HTML-mail na bestelling
 - ❤️ **Donaties** — Doneer direct via een eenvoudig formulier
 - 👤 **Gebruikersaccounts** — Registreer en log in om bestellingen te plaatsen
-- 🔐 **Admin dashboard** — Beheer bestellingen, producten en donaties
+- 🔐 **Admin dashboard** — Beheer producten (inclusief foto-upload), bestellingen en donaties
+- 🖼️ **Foto-upload** — Upload productfoto's direct vanuit het admin dashboard
+- 🐳 **Docker-ondersteuning** — Start de volledige app met één commando
+- 🔒 **CSRF-beveiliging** — Alle formulieren zijn beveiligd tegen cross-site request forgery
 - 📱 **Responsief design** — Werkt op desktop en mobiel
 
 ---
 
-## 🗂️ Projectstructuur
-
-```
-Littlewings/
-├── run.py                   # Startpunt van de applicatie
-├── requirements.txt         # Python dependencies
-├── app/
-│   ├── __init__.py          # App factory (Flask setup)
-│   ├── routes.py            # Alle URL-routes en logica
-│   ├── models.py            # Database modellen
-│   ├── forms.py             # WTForms formulieren
-│   ├── auth.py              # Authenticatie helpers
-│   ├── db.sqlite            # SQLite database
-│   ├── static/
-│   │   ├── css/style.css    # Styling
-│   │   └── img/             # Productafbeeldingen & logo
-│   └── templates/
-│       ├── base.html        # Basis template
-│       ├── home.html        # Homepagina
-│       ├── shop.html        # Webshop
-│       ├── winkelwagen.html # Winkelwagen
-│       ├── betaal_bestelling.html  # Checkout bestelling
-│       ├── betaal_donatie.html     # Checkout donatie
-│       ├── doneer.html      # Donatiepagina
-│       ├── over_ons.html    # Over ons pagina
-│       ├── login.html       # Inloggen
-│       ├── register.html    # Registreren
-│       ├── welcome.html     # Welkomstpagina
-│       └── admin.html       # Beheerpaneel
-```
-
----
-
-## 🚀 Installatie & opstarten
+## 🚀 Opstarten met Docker (aanbevolen)
 
 ### Vereisten
 
-- Python 3.10 of hoger
-- pip
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Stappen
 
@@ -85,34 +56,120 @@ git clone https://github.com/Littlewingsss/Littlewings.git
 cd Littlewings
 ```
 
-**2. Maak een virtuele omgeving aan**
+**2. Maak een `.env` bestand aan**
 ```bash
+cp .env.example .env
+```
+Pas de waarden aan in `.env` (minimaal `SECRET_KEY`). Zie de sectie [Omgevingsvariabelen](#-omgevingsvariabelen) hieronder.
+
+**3. Bouw en start de container**
+```bash
+docker compose up -d --build
+```
+
+**4. Initialiseer de database (alleen eerste keer)**
+```bash
+docker compose exec web python -c "from app import create_app, db; app = create_app(); app.app_context().push(); db.create_all()"
+docker compose exec web python db.py
+```
+
+**5. Open de app**
+
+Ga naar [http://localhost:5001](http://localhost:5001) 🎉
+
+### Handige Docker-commando's
+
+```bash
+docker compose up -d --build   # Herbouw en herstart (na codewijzigingen)
+docker compose down            # Stop de container
+docker compose logs -f         # Bekijk live logs
+docker compose exec web python db.py   # Herseed de database
+```
+
+> **Foto-uploads** worden bewaard in `./app/static/img/` op je host via een volume-mount — ze blijven dus staan na een `--build`.
+
+---
+
+## 💻 Lokaal opstarten (zonder Docker)
+
+### Vereisten
+
+- Python 3.10 of hoger
+
+### Stappen
+
+```bash
+git clone https://github.com/Littlewingsss/Littlewings.git
+cd Littlewings
 python -m venv .venv
-```
-
-**3. Activeer de virtuele omgeving**
-
-Op Windows:
-```bash
-.venv\Scripts\activate
-```
-
-Op macOS/Linux:
-```bash
-source .venv/bin/activate
-```
-
-**4. Installeer de dependencies**
-```bash
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-**5. Start de applicatie**
-```bash
+cp .env.example .env             # Pas SECRET_KEY aan
+python db.py                     # Initialiseer en seed de database
 python run.py
 ```
 
-De app is nu beschikbaar op [http://localhost:5000](http://localhost:5000) 🎉
+De app is nu beschikbaar op [http://localhost:5000](http://localhost:5000).
+
+---
+
+## 🔧 Omgevingsvariabelen
+
+Kopieer `.env.example` naar `.env` en vul de waarden in:
+
+| Variabele | Beschrijving | Verplicht |
+|---|---|---|
+| `SECRET_KEY` | Willekeurige geheime sleutel voor sessies en CSRF | Ja |
+| `MAIL_SERVER` | SMTP-server (standaard: `smtp.gmail.com`) | Nee |
+| `MAIL_PORT` | SMTP-poort (standaard: `587`) | Nee |
+| `MAIL_USERNAME` | E-mailadres waarmee mails worden verstuurd | Nee* |
+| `MAIL_PASSWORD` | App-wachtwoord van de e-mailprovider | Nee* |
+| `MAIL_DEFAULT_SENDER` | Afzenderadres (standaard gelijk aan `MAIL_USERNAME`) | Nee |
+
+> \* Laat `MAIL_USERNAME` leeg om bevestigingsmails uit te schakelen. De app werkt gewoon door zonder e-mailconfiguratie.
+
+**Gmail instellen:** gebruik een [App Password](https://myaccount.google.com/apppasswords) (vereist 2FA).
+
+---
+
+## 🗂️ Projectstructuur
+
+```
+Littlewings/
+├── run.py                      # Startpunt van de applicatie
+├── db.py                       # Database initialisatie en seeding
+├── requirements.txt            # Python dependencies
+├── Dockerfile                  # Docker image definitie
+├── docker-compose.yml          # Container configuratie
+├── .env.example                # Voorbeeld omgevingsvariabelen
+└── app/
+    ├── __init__.py             # App factory (Flask setup + extensies)
+    ├── models.py               # Database modellen
+    ├── forms.py                # WTForms formulieren
+    ├── auth.py                 # admin_required decorator
+    ├── mail.py                 # Bevestigingsmail functie
+    ├── routes.py               # (vervangen door blueprints)
+    ├── blueprints/
+    │   ├── auth.py             # Login, register, logout, home
+    │   ├── shop.py             # Shop, winkelwagen, bestelling, donaties
+    │   └── admin.py            # Admin dashboard en productbeheer
+    ├── static/
+    │   ├── css/                # Stylesheets
+    │   └── img/                # Productafbeeldingen (ook uploads)
+    └── templates/
+        ├── base.html           # Basis template met navigatie
+        ├── welcome.html        # Welkomst- en loginpagina
+        ├── home.html           # Homepagina
+        ├── shop.html           # Webshop
+        ├── winkelwagen.html    # Winkelwagen en checkout-formulier
+        ├── betaal_bestelling.html  # Betaalpagina bestelling
+        ├── betaal_donatie.html     # Betaalpagina donatie
+        ├── doneer.html         # Donatiepagina
+        ├── over_ons.html       # Over ons
+        ├── login.html          # Inloggen
+        ├── register.html       # Registreren
+        └── admin.html          # Beheerpaneel
+```
 
 ---
 
@@ -135,10 +192,48 @@ De app is nu beschikbaar op [http://localhost:5000](http://localhost:5000) 🎉
 | [Flask](https://flask.palletsprojects.com/) | Web framework |
 | [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/) | Database ORM |
 | [Flask-Login](https://flask-login.readthedocs.io/) | Gebruikersauthenticatie |
-| [Flask-WTF](https://flask-wtf.readthedocs.io/) | Formuliervalidatie |
+| [Flask-WTF](https://flask-wtf.readthedocs.io/) | Formuliervalidatie en CSRF-bescherming |
 | [Flask-Migrate](https://flask-migrate.readthedocs.io/) | Database migraties |
+| [Flask-Mail](https://pythonhosted.org/Flask-Mail/) | Bevestigingsmails |
 | [SQLite](https://sqlite.org/) | Database |
 | [Jinja2](https://jinja.palletsprojects.com/) | HTML templates |
+| [Docker](https://docker.com/) | Containerisatie |
+
+---
+
+## 📋 Changelog
+
+### Recente verbeteringen
+
+**Blueprints architectuur**
+- `routes.py` opgesplitst in drie Flask blueprints: `auth`, `shop` en `admin`
+- Betere scheiding van verantwoordelijkheden en overzichtelijkere codestructuur
+
+**Docker-ondersteuning**
+- `Dockerfile` en `docker-compose.yml` toegevoegd
+- App start met één commando: `docker compose up -d --build`
+- Volumes voor database (`instance/`) en foto-uploads (`app/static/img/`)
+
+**Bevestigingsmail**
+- Na elke bestelling ontvangt de klant automatisch een HTML-mail
+- Bevat bestelregels, totaalbedrag inclusief verzending en bezorgadres
+- Eenvoudig in te schakelen via `MAIL_USERNAME` in `.env`
+
+**Foto-upload in admin**
+- Productfoto's kunnen nu direct worden geüpload via het admin dashboard
+- Ondersteunt PNG, JPG, JPEG, GIF en WEBP
+- Valt terug op handmatige bestandsnaam als er geen bestand wordt geüpload
+
+**Checkout-validatie**
+- Serverside validatie van alle verplichte adresvelden
+- E-mailformaatcontrole bij het plaatsen van een bestelling
+- Duidelijke foutmeldingen per ontbrekend veld
+
+**Bug fixes & beveiligingsverbeteringen**
+- CSRF-tokens toegevoegd aan alle formulieren (admin, betaalpagina's, donatie)
+- `Product.query.get()` vervangen door `db.session.get()` (SQLAlchemy 2.x compatibel)
+- `functools.wraps` toegevoegd aan `admin_required` decorator
+- Ontbrekende dependencies (`Flask-Login`, `Flask-Migrate`, `email-validator`) toegevoegd aan `requirements.txt`
 
 ---
 
@@ -146,7 +241,7 @@ De app is nu beschikbaar op [http://localhost:5000](http://localhost:5000) 🎉
 
 - 💚 **100% van de winst** gaat naar kinderen in oorlogsgebieden
 - 🌱 **Duurzame materialen** in alle producten
-- 🚚 **Gratis verzending** op alle bestellingen
+- 🚚 **Gratis verzending** op standaard bestellingen
 - 🌐 **Wereldwijde impact** — elk klein gebaar telt
 
 ---
