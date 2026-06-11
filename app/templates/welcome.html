@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-wrap">
                     <form class="auth-form on" id="loginForm" action="{{ url_for('login') }}" method="POST">
-                        
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <label>E-mailadres</label>
                         <input type="email" name="email" placeholder="jouw@email.nl" required/>
                         <label>Wachtwoord</label>
@@ -43,7 +43,7 @@
                         <button type="submit" class="auth-submit">Inloggen</button>
                     </form>
                     <form class="auth-form" id="registerForm" action="{{ url_for('register') }}" method="POST">
-                        
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <label>Gebruikersnaam</label>
                         <input type="text" name="username" placeholder="Jouw gebruikersnaam" required/>
                         <label>E-mailadres</label>
