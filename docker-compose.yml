@@ -7,4 +7,5 @@ services:
       - .env
     volumes:
       - ./instance:/app/instance
+      - ./app/static/img:/app/app/static/img
     restart: unless-stopped

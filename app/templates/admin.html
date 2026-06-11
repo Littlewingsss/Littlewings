@@ -59,7 +59,7 @@
             <tr class="edit-form-row">
               <td colspan="6">
                 <strong style="color:var(--primary);display:block;margin-bottom:.8rem">✏️ Product #{{ p.id }} wijzigen</strong>
-                <form method="POST" action="{{ url_for('admin.admin_wijzig_product', product_id=p.id) }}" class="admin-form">
+                <form method="POST" action="{{ url_for('admin.admin_wijzig_product', product_id=p.id) }}" class="admin-form" enctype="multipart/form-data">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <div class="form-row">
                     <div>
@@ -77,8 +77,12 @@
                       <input type="number" name="voorraad" min="0" value="{{ p.voorraad }}">
                     </div>
                     <div>
-                      <label>Foto (bestandsnaam)</label>
-                      <input type="text" name="foto" value="{{ p.foto or '' }}" placeholder="bijv. hoodie.png">
+                      <label>Foto uploaden</label>
+                      <input type="file" name="foto_bestand" accept="image/png,image/jpeg,image/gif,image/webp">
+                      {% if p.foto %}
+                        <small style="color:var(--text-light)">Huidig: {{ p.foto }}</small>
+                      {% endif %}
+                      <input type="text" name="foto" value="{{ p.foto or '' }}" placeholder="Of bestandsnaam, bijv. hoodie.png" style="margin-top:.3rem">
                     </div>
                   </div>
                   <div>
@@ -268,7 +272,7 @@
   <div id="nieuw" class="admin-section">
     <div class="admin-card">
       <h2>➕ Nieuw product toevoegen</h2>
-      <form method="POST" action="{{ url_for('admin.admin_add_product') }}" class="admin-form">
+      <form method="POST" action="{{ url_for('admin.admin_add_product') }}" class="admin-form" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div>
           <label>Productnaam *</label>
@@ -289,8 +293,10 @@
           </div>
         </div>
         <div>
-          <label>Foto bestandsnaam (in /static/img/)</label>
-          <input type="text" name="foto" placeholder="bijv. hoodie.png">
+          <label>Foto uploaden</label>
+          <input type="file" name="foto_bestand" accept="image/png,image/jpeg,image/gif,image/webp">
+          <small style="color:var(--text-light)">Of vul een bestaande bestandsnaam in:</small>
+          <input type="text" name="foto" placeholder="bijv. hoodie.png" style="margin-top:.3rem">
         </div>
         <button type="submit" class="btn-primary" style="justify-self:start;margin-top:.5rem">
           ➕ Product toevoegen

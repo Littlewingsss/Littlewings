@@ -208,6 +208,10 @@ def bestelling_bevestig():
             ))
             product.voorraad = max(0, product.voorraad - aantal)
     db.session.commit()
+
+    from app.mail import stuur_bevestigingsmail
+    stuur_bevestigingsmail(order)
+
     session.pop('winkelwagen', None)
     session.pop('bestelling_data', None)
     flash(f'Order geplaatst, bedankt {klant_naam}! 🎉', 'success')

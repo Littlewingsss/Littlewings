@@ -1,7 +1,23 @@
-from flask import Blueprint, render_template, redirect, request, url_for, flash, abort
+import os
+from flask import Blueprint, render_template, redirect, request, url_for, flash, abort, current_app
+from werkzeug.utils import secure_filename
 from app import db
 from app.models import Product, Order
 from app.auth import admin_required
+
+_TOEGESTANE_EXTENSIES = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+
+def _sla_foto_op(file):
+    if not file or not file.filename:
+        return None
+    ext = file.filename.rsplit('.', 1)[-1].lower() if '.' in file.filename else ''
+    if ext not in _TOEGESTANE_EXTENSIES:
+        return None
+    filename = secure_filename(file.filename)
+    upload_dir = os.path.join(current_app.root_path, 'static', 'img')
+    os.makedirs(upload_dir, exist_ok=True)
+    file.save(os.path.join(upload_dir, filename))
+    return filename
 
 bp = Blueprint('admin', __name__)
 
@@ -28,7 +44,7 @@ def admin_add_product():
     beschrijving = request.form.get('beschrijving')
     prijs = float(request.form.get('prijs', 0))
     voorraad = int(request.form.get('voorraad', 0))
-    foto = request.form.get('foto') or None
+    foto = _sla_foto_op(request.files.get('foto_bestand')) or request.form.get('foto') or None
     db.session.add(Product(naam=naam, beschrijving=beschrijving, prijs=prijs, voorraad=voorraad, foto=foto))
     db.session.commit()
     flash(f'Product "{naam}" toegevoegd!', 'success')
@@ -43,7 +59,11 @@ def admin_wijzig_product(product_id):
     product.beschrijving = request.form.get('beschrijving')
     product.prijs = float(request.form.get('prijs', product.prijs))
     product.voorraad = int(request.form.get('voorraad', product.voorraad))
-    product.foto = request.form.get('foto') or None
+    product.foto = (
+        _sla_foto_op(request.files.get('foto_bestand'))
+        or request.form.get('foto')
+        or None
+    )
     db.session.commit()
     flash(f'Product "{product.naam}" bijgewerkt!', 'success')
     return redirect(url_for('admin.admin'))
