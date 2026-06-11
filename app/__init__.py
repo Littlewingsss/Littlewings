@@ -15,7 +15,9 @@ def create_app():
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(32))
     basedir = os.path.abspath(os.path.dirname(__file__))
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
+    DB_DIR = os.path.join(basedir, '..', 'instance')
+    os.makedirs(DB_DIR, exist_ok=True)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(DB_DIR, 'db.sqlite')
 
     db.init_app(app)
     login_manager.init_app(app)
