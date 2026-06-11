@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, url_for
 from flask_mail import Message
 from app import mail
 
@@ -93,3 +93,49 @@ def stuur_bevestigingsmail(order):
         current_app.logger.info(f'Bevestigingsmail verstuurd naar {order.klant_email}')
     except Exception as exc:
         current_app.logger.error(f'Bevestigingsmail mislukt voor order #{order.id}: {exc}')
+
+
+def stuur_reset_mail(user, token: str) -> None:
+    if not current_app.config.get('MAIL_USERNAME'):
+        current_app.logger.info('MAIL_USERNAME niet ingesteld – resetmail overgeslagen.')
+        return
+
+    reset_url = url_for('auth.wachtwoord_reset', token=token, _external=True)
+
+    html = f"""
+    <div style="font-family:Nunito,sans-serif;max-width:600px;margin:auto;color:#1e1b4b">
+      <div style="background:#7c3aed;padding:28px 32px;border-radius:12px 12px 0 0;text-align:center">
+        <h1 style="color:#fff;margin:0;font-size:1.6rem">&#128156; Little Wings</h1>
+        <p style="color:#e9d5ff;margin:6px 0 0">Play &middot; Heal &middot; Fly</p>
+      </div>
+      <div style="background:#fff;padding:32px;border:1px solid #e8e0f5;border-top:none;border-radius:0 0 12px 12px">
+        <h2 style="color:#7c3aed;margin-top:0">Wachtwoord resetten</h2>
+        <p>Hoi {user.username},</p>
+        <p>We hebben een verzoek ontvangen om je wachtwoord te resetten.
+           Klik op de knop hieronder om een nieuw wachtwoord in te stellen.
+           De link is <strong>1 uur</strong> geldig.</p>
+        <div style="text-align:center;margin:32px 0">
+          <a href="{reset_url}"
+             style="background:#7c3aed;color:#fff;padding:14px 32px;border-radius:8px;
+                    text-decoration:none;font-weight:700;font-size:1rem">
+            Wachtwoord resetten
+          </a>
+        </div>
+        <p style="color:#888;font-size:.9rem">
+          Als je dit niet hebt aangevraagd, kun je deze e-mail negeren.
+          Je wachtwoord blijft ongewijzigd.
+        </p>
+      </div>
+    </div>
+    """
+
+    msg = Message(
+        subject='Wachtwoord resetten – Little Wings',
+        recipients=[user.email],
+        html=html,
+    )
+    try:
+        mail.send(msg)
+        current_app.logger.info(f'Resetmail verstuurd naar {user.email}')
+    except Exception as exc:
+        current_app.logger.error(f'Resetmail mislukt voor {user.email}: {exc}')

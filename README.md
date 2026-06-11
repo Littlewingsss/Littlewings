@@ -29,9 +29,13 @@ Little Wings is een initiatief dat kinderen in moeilijke situaties ondersteunt. 
 ## ✨ Features
 
 - 🛍️ **Webshop** — Browse en bestel producten uit de Little Wings collectie
+- 🔍 **Zoekfunctie** — Zoek producten op naam of beschrijving direct in de shop
 - 🛒 **Winkelwagen** — Voeg producten toe, pas aantallen aan en beheer je bestelling
 - 💳 **Checkout met validatie** — Serverside validatie van alle adresvelden en e-mailformaat
+- 📦 **Bestellingstatus** — Klanten kunnen hun bestelling terugzoeken via ordernummer en e-mail
 - 📧 **Bevestigingsmail** — Klant ontvangt automatisch een HTML-mail na bestelling
+- 🔑 **Wachtwoord reset** — Vergeten wachtwoord resetten via een beveiligde e-maillink
+- 🌍 **Meertaligheid** — Volledige NL/EN taalwissel via één knop in de navigatiebalk
 - ❤️ **Donaties** — Doneer direct via een eenvoudig formulier
 - 👤 **Gebruikersaccounts** — Registreer en log in om bestellingen te plaatsen
 - 🔐 **Admin dashboard** — Beheer producten (inclusief foto-upload), bestellingen en donaties
@@ -157,18 +161,28 @@ Littlewings/
     │   ├── css/                # Stylesheets
     │   └── img/                # Productafbeeldingen (ook uploads)
     └── templates/
-        ├── base.html           # Basis template met navigatie
-        ├── welcome.html        # Welkomst- en loginpagina
-        ├── home.html           # Homepagina
-        ├── shop.html           # Webshop
-        ├── winkelwagen.html    # Winkelwagen en checkout-formulier
+        ├── base.html               # Basis template met navigatie
+        ├── welcome.html            # Welkomst- en loginpagina
+        ├── home.html               # Homepagina
+        ├── shop.html               # Webshop (met zoekfunctie)
+        ├── winkelwagen.html        # Winkelwagen en checkout-formulier
         ├── betaal_bestelling.html  # Betaalpagina bestelling
         ├── betaal_donatie.html     # Betaalpagina donatie
-        ├── doneer.html         # Donatiepagina
-        ├── over_ons.html       # Over ons
-        ├── login.html          # Inloggen
-        ├── register.html       # Registreren
-        └── admin.html          # Beheerpaneel
+        ├── doneer.html             # Donatiepagina
+        ├── over_ons.html           # Over ons
+        ├── bestelling_status.html  # Bestellingstatus opzoeken
+        ├── wachtwoord_vergeten.html # Wachtwoord vergeten formulier
+        ├── wachtwoord_reset.html   # Nieuw wachtwoord instellen
+        ├── login.html              # Inloggen
+        ├── register.html           # Registreren
+        └── admin.html              # Beheerpaneel
+└── translations/
+    ├── nl/LC_MESSAGES/
+    │   ├── messages.po             # Nederlandse vertaalstrings (bronstring)
+    │   └── messages.mo             # Gecompileerd binair bestand
+    └── en/LC_MESSAGES/
+        ├── messages.po             # Engelse vertalingen (222 strings)
+        └── messages.mo             # Gecompileerd binair bestand
 ```
 
 ---
@@ -195,6 +209,7 @@ Littlewings/
 | [Flask-WTF](https://flask-wtf.readthedocs.io/) | Formuliervalidatie en CSRF-bescherming |
 | [Flask-Migrate](https://flask-migrate.readthedocs.io/) | Database migraties |
 | [Flask-Mail](https://pythonhosted.org/Flask-Mail/) | Bevestigingsmails |
+| [Flask-Babel](https://python-babel.github.io/flask-babel/) | Meertaligheid (i18n) |
 | [SQLite](https://sqlite.org/) | Database |
 | [Jinja2](https://jinja.palletsprojects.com/) | HTML templates |
 | [Docker](https://docker.com/) | Containerisatie |
@@ -204,6 +219,29 @@ Littlewings/
 ## 📋 Changelog
 
 ### Recente verbeteringen
+
+**Meertaligheid (NL/EN) via Flask-Babel**
+- Volledige Nederlandse en Engelse interface — 222 strings vertaald in alle templates en Python-bestanden
+- Taalwisselknop in de navigatiebalk (🇬🇧 EN / 🇳🇱 NL) — taalkeuze opgeslagen in de sessie
+- Meervoudsvormen correct afgehandeld (`ngettext`)
+- WTForms-labels vertaald met `lazy_gettext`; flash berichten met `_()` in alle blueprints
+- Vertaalworkflow: `babel.cfg` → `pybabel extract` → `pybabel compile`
+
+**Zoekfunctie in de shop**
+- Zoekbalk bovenaan de shop om te filteren op productnaam of -beschrijving
+- URL-parameter `?q=` — zoekresultaten zijn deelbaar via de URL
+- Resultaatteller met optie om de zoekopdracht te wissen
+
+**Bestellingstatus pagina**
+- Klanten kunnen hun bestelling terugzoeken via ordernummer + e-mailadres (geen login vereist)
+- Toont bestelregel, adresgegevens, verzend- en betaalmethode en totaalbedrag
+- Bereikbaar via "Mijn bestelling" in de navigatiebalk
+
+**Wachtwoord vergeten & reset**
+- "Wachtwoord vergeten?" link op de loginpagina
+- Beveiligde resetlink via e-mail (geldig 1 uur, gegenereerd met `itsdangerous`)
+- E-mail enumeration voorkomen: altijd dezelfde melding tonen ongeacht of account bestaat
+- Werkt automatisch mee met de bestaande MAIL-configuratie in `.env`
 
 **Blueprints architectuur**
 - `routes.py` opgesplitst in drie Flask blueprints: `auth`, `shop` en `admin`

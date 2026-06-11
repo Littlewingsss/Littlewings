@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Shop — Little Wings{% endblock %}
+{% block title %}{{ _('Shop') }} — Little Wings{% endblock %}
 
 {% block content %}
 
@@ -11,9 +11,33 @@
     <div class="sh-circle sh-circle-3"></div>
   </div>
   <div class="shop-hero-content">
-    <span class="shop-badge">Onze collectie</span>
-    <h1 class="shop-hero-title">Little Wings <span>Shop</span></h1>
-    <p class="shop-hero-sub">Elk product draagt bij aan onze missie - samen sterker</p>
+    <span class="shop-badge">{{ _('Onze collectie') }}</span>
+    <h1 class="shop-hero-title">Little Wings <span>{{ _('Shop') }}</span></h1>
+    <p class="shop-hero-sub">{{ _('Elk product draagt bij aan onze missie - samen sterker') }}</p>
+
+    <form method="GET" action="{{ url_for('shop.shop') }}" class="shop-zoek-form" role="search">
+      <input
+        type="search"
+        name="q"
+        value="{{ zoekterm }}"
+        placeholder="{{ _('Zoek producten...') }}"
+        class="shop-zoek-input"
+        aria-label="{{ _('Zoek producten') }}"
+      >
+      <button type="submit" class="shop-zoek-knop">{{ _('Zoeken') }}</button>
+    </form>
+
+    {% if zoekterm %}
+    <p class="shop-zoek-resultaat">
+      {% if producten %}
+        {{ ngettext('%(n)d resultaat voor', '%(n)d resultaten voor', producten|length, n=producten|length) }}
+        "<strong>{{ zoekterm }}</strong>"
+      {% else %}
+        {{ _('Geen producten gevonden voor "%(term)s"', term=zoekterm) }}
+      {% endif %}
+      &nbsp;<a href="{{ url_for('shop.shop') }}" class="shop-zoek-wis">× {{ _('Wis zoekopdracht') }}</a>
+    </p>
+    {% endif %}
   </div>
 </section>
 
@@ -24,12 +48,11 @@
 
       <div class="product-img-wrap">
         <img src="{{ url_for('static', filename='img/' + product.foto) }}" alt="{{ product.naam }}">
-         
 
         {% if product.voorraad <= 3 and product.voorraad > 0 %}
-          <span class="product-badge badge-laag">Bijna op!</span>
+          <span class="product-badge badge-laag">{{ _('Bijna op!') }}</span>
         {% elif product.voorraad == 0 %}
-          <span class="product-badge badge-uit">Uitverkocht</span>
+          <span class="product-badge badge-uit">{{ _('Uitverkocht') }}</span>
         {% endif %}
       </div>
 
@@ -51,9 +74,9 @@
               {% if product.voorraad == 0 %}disabled{% endif %}
             >
               {% if product.voorraad == 0 %}
-                Uitverkocht
+                {{ _('Uitverkocht') }}
               {% else %}
-                Toevoegen
+                {{ _('Toevoegen') }}
               {% endif %}
             </button>
           </form>
@@ -64,7 +87,7 @@
     </div>
     {% else %}
     <div class="shop-leeg">
-      <p>Er zijn nog geen producten beschikbaar.</p>
+      <p>{{ _('Er zijn nog geen producten beschikbaar.') }}</p>
     </div>
     {% endfor %}
   </div>
@@ -74,13 +97,11 @@
   <div class="shop-missie-inner">
     <span class="missie-icon">💜</span>
     <div>
-      <h3>Elke aankoop telt</h3>
-      <p>De opbrengst van de shop gaat direct naar onze projecten voor kinderen en jongeren.</p>
+      <h3>{{ _('Elke aankoop telt') }}</h3>
+      <p>{{ _('De opbrengst van de shop gaat direct naar onze projecten voor kinderen en jongeren.') }}</p>
     </div>
-    <a href="{{ url_for('shop.doneer') }}" class="knop-teal">Doneer ook</a>
+    <a href="{{ url_for('shop.doneer') }}" class="knop-teal">{{ _('Doneer ook') }}</a>
   </div>
 </section>
-
-
 
 {% endblock %}

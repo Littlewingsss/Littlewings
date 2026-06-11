@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Nieuw wachtwoord instellen') }} — Little Wings{% endblock %}
+
+{% block content %}
+
+<section style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem">
+  <div style="background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(124,58,237,.1);
+              padding:2.5rem;width:100%;max-width:440px">
+
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <span style="font-size:2.5rem">🔒</span>
+      <h2 style="color:#7c3aed;margin:.5rem 0 .25rem">{{ _('Nieuw wachtwoord') }}</h2>
+      <p style="color:#888;font-size:.95rem;margin:0">{{ _('Kies een sterk wachtwoord van minimaal 6 tekens.') }}</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.wachtwoord_reset', token=token) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">{{ _('Nieuw wachtwoord') }}</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="{{ _('Minimaal 6 tekens') }}"
+          minlength="6"
+          required
+          autofocus
+        >
+      </div>
+
+      <div class="mb-4">
+        <label for="confirm_password" class="form-label fw-semibold">{{ _('Bevestig wachtwoord') }}</label>
+        <input
+          type="password"
+          id="confirm_password"
+          name="confirm_password"
+          class="form-control"
+          placeholder="{{ _('Herhaal je wachtwoord') }}"
+          minlength="6"
+          required
+        >
+      </div>
+
+      <button type="submit" class="knop-teal w-100" style="font-size:1rem;padding:.75rem">
+        {{ _('Wachtwoord instellen') }}
+      </button>
+    </form>
+
+    <p style="text-align:center;margin-top:1.25rem;font-size:.9rem">
+      <a href="{{ url_for('auth.index') }}" style="color:#7c3aed">← {{ _('Terug naar inloggen') }}</a>
+    </p>
+
+  </div>
+</section>
+
+{% endblock %}

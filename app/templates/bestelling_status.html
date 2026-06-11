@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}{{ _('Bestellingstatus') }} — Little Wings{% endblock %}
+
+{% block content %}
+
+<section class="shop-hero">
+  <div class="shop-hero-circles">
+    <div class="sh-circle sh-circle-1"></div>
+    <div class="sh-circle sh-circle-2"></div>
+    <div class="sh-circle sh-circle-3"></div>
+  </div>
+  <div class="shop-hero-content">
+    <span class="shop-badge">{{ _('Jouw bestelling') }}</span>
+    <h1 class="shop-hero-title">{{ _('Bestelling') }} <span>{{ _('opzoeken') }}</span></h1>
+    <p class="shop-hero-sub">{{ _('Vul je ordernummer en e-mailadres in om je bestelling te bekijken') }}</p>
+  </div>
+</section>
+
+<section class="shop-sectie" style="max-width:640px;margin:0 auto;padding:2rem 1rem">
+
+  <div class="winkelwagen-kaart" style="margin-bottom:2rem">
+    <form method="POST" action="{{ url_for('shop.bestelling_status') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+      <div class="mb-3">
+        <label for="order_id" class="form-label fw-semibold">{{ _('Ordernummer') }}</label>
+        <input
+          type="number"
+          id="order_id"
+          name="order_id"
+          class="form-control"
+          placeholder="{{ _('bijv. 42') }}"
+          min="1"
+          required
+        >
+      </div>
+
+      <div class="mb-4">
+        <label for="klant_email" class="form-label fw-semibold">{{ _('E-mailadres') }}</label>
+        <input
+          type="email"
+          id="klant_email"
+          name="klant_email"
+          class="form-control"
+          placeholder="{{ _('jouw@email.nl') }}"
+          required
+        >
+      </div>
+
+      <button type="submit" class="knop-teal w-100">{{ _('Bestelling opzoeken') }}</button>
+    </form>
+  </div>
+
+  {% if order %}
+  <div class="winkelwagen-kaart">
+    <h2 style="color:#7c3aed;margin-top:0">{{ _('Bestelling') }} #{{ order.id }}</h2>
+
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6">
+        <p class="mb-1 text-muted" style="font-size:.85rem">{{ _('Naam') }}</p>
+        <p class="fw-semibold mb-0">{{ order.klant_naam }}</p>
+      </div>
+      <div class="col-sm-6">
+        <p class="mb-1 text-muted" style="font-size:.85rem">{{ _('E-mailadres') }}</p>
+        <p class="fw-semibold mb-0">{{ order.klant_email }}</p>
+      </div>
+      <div class="col-sm-6">
+        <p class="mb-1 text-muted" style="font-size:.85rem">{{ _('Besteldatum') }}</p>
+        <p class="fw-semibold mb-0">{{ order.besteld_op.strftime('%d-%m-%Y %H:%M') }}</p>
+      </div>
+      <div class="col-sm-6">
+        <p class="mb-1 text-muted" style="font-size:.85rem">{{ _('Verzendmethode') }}</p>
+        <p class="fw-semibold mb-0">
+          {% if order.verzendmethode == 'express' %}
+            {{ _('Express (€4,99)') }}
+          {% elif order.verzendmethode == 'ophalen' %}
+            {{ _('Ophalen') }}
+          {% else %}
+            {{ _('Standaard (gratis)') }}
+          {% endif %}
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <p class="mb-1 text-muted" style="font-size:.85rem">{{ _('Betaalmethode') }}</p>
+        <p class="fw-semibold mb-0 text-capitalize">{{ order.betaalmethode or '—' }}</p>
+      </div>
+    </div>
+
+    {% if order.straat %}
+    <div class="mb-4">
+      <p class="mb-1 text-muted" style="font-size:.85rem">{{ _('Bezorgadres') }}</p>
+      <p class="fw-semibold mb-0">
+        {{ order.straat }}<br>
+        {{ order.postcode }} {{ order.stad }}<br>
+        {{ order.land }}
+      </p>
+    </div>
+    {% endif %}
+
+    <h4 style="color:#4c1d95;border-bottom:2px solid #e8e0f5;padding-bottom:.5rem">{{ _('Producten') }}</h4>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>{{ _('Product') }}</th>
+          <th class="text-center">{{ _('Aantal') }}</th>
+          <th class="text-end">{{ _('Subtotaal') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for regel in order.regels %}
+        <tr>
+          <td>{{ regel.product.naam if regel.product else _('(verwijderd)') }}</td>
+          <td class="text-center">{{ regel.aantal }}×</td>
+          <td class="text-end">€ {{ "%.2f"|format(regel.prijs_per_stuk * regel.aantal) }}</td>
+        </tr>
+        {% endfor %}
+        {% set verzend_kosten = 4.99 if order.verzendmethode == 'express' else 0.0 %}
+        <tr class="text-muted">
+          <td colspan="2">{{ _('Verzendkosten') }}</td>
+          <td class="text-end">{{ _('€ 4,99') if verzend_kosten else _('Gratis') }}</td>
+        </tr>
+        <tr class="fw-bold">
+          <td colspan="2">{{ _('Totaal') }}</td>
+          <td class="text-end" style="color:#7c3aed">
+            € {{ "%.2f"|format(order.totaal() + verzend_kosten) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% elif gezocht %}
+  {# flash message already shown by the route #}
+  {% endif %}
+
+</section>
+
+{% endblock %}

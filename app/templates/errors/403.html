@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Geen toegang — Little Wings{% endblock %}
+{% block title %}{{ _('Geen toegang') }} — Little Wings{% endblock %}
 {% block content %}
 <div class="error-page">
   <div class="error-card">
     <div class="error-code">403</div>
     <div class="error-icon">🔒</div>
-    <h1 class="error-title">Geen toegang</h1>
+    <h1 class="error-title">{{ _('Geen toegang') }}</h1>
     <p class="error-msg">
-      Je hebt geen toestemming om deze pagina te bekijken.<br>
-      Log in als admin om hier toegang toe te krijgen.
+      {{ _('Je hebt geen toestemming om deze pagina te bekijken.') }}<br>
+      {{ _('Log in als admin om hier toegang toe te krijgen.') }}
     </p>
     <div class="error-knoppen">
-      <a href="{{ url_for('auth.index') }}" class="knop-teal">← Terug naar home</a>
+      <a href="{{ url_for('auth.index') }}" class="knop-teal">← {{ _('Terug naar home') }}</a>
     </div>
   </div>
 </div>

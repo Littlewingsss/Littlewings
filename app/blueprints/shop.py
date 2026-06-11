@@ -1,5 +1,6 @@
 import re
 from flask import Blueprint, render_template, redirect, request, url_for, flash, Response, session, abort
+from flask_babel import _
 from app import db
 from app.models import Product, Order, OrderRegel
 
@@ -8,8 +9,17 @@ bp = Blueprint('shop', __name__)
 
 @bp.route('/shop')
 def shop():
-    producten = Product.query.all()
-    return render_template('shop.html', producten=producten)
+    zoekterm = request.args.get('q', '').strip()
+    if zoekterm:
+        producten = Product.query.filter(
+            db.or_(
+                Product.naam.ilike(f'%{zoekterm}%'),
+                Product.beschrijving.ilike(f'%{zoekterm}%'),
+            )
+        ).all()
+    else:
+        producten = Product.query.all()
+    return render_template('shop.html', producten=producten, zoekterm=zoekterm)
 
 
 @bp.route('/toevoegen/<int:product_id>', methods=['POST'])
@@ -19,11 +29,11 @@ def toevoegen(product_id):
     key = str(product_id)
     huidige_aantal = winkelwagen.get(key, 0)
     if huidige_aantal >= product.voorraad:
-        flash(f'Niet genoeg voorraad! Er zijn nog maar {product.voorraad} stuks beschikbaar.', 'danger')
+        flash(_('Niet genoeg voorraad! Er zijn nog maar %(n)d stuks beschikbaar.', n=product.voorraad), 'danger')
         return redirect(url_for('shop.shop'))
     winkelwagen[key] = huidige_aantal + 1
     session['winkelwagen'] = winkelwagen
-    flash('Product toegevoegd aan je winkelwagen! 🛒', 'success')
+    flash(_('Product toegevoegd aan je winkelwagen! 🛒'), 'success')
     return redirect(url_for('shop.shop'))
 
 
@@ -34,7 +44,7 @@ def verhogen(product_id):
     key = str(product_id)
     huidige_aantal = winkelwagen.get(key, 0)
     if huidige_aantal >= product.voorraad:
-        flash(f'Niet genoeg voorraad! Er zijn nog maar {product.voorraad} stuks beschikbaar.', 'danger')
+        flash(_('Niet genoeg voorraad! Er zijn nog maar %(n)d stuks beschikbaar.', n=product.voorraad), 'danger')
     else:
         winkelwagen[key] = huidige_aantal + 1
         session['winkelwagen'] = winkelwagen
@@ -103,10 +113,10 @@ def _valideer_checkout(form) -> list[str]:
     ]
     for key, label in verplichte_velden:
         if not form.get(key, '').strip():
-            fouten.append(f'{label} is verplicht.')
+            fouten.append(_('%(label)s is verplicht.', label=_(label)))
     email = form.get('klant_email', '').strip()
     if email and not _EMAIL_RE.match(email):
-        fouten.append('Vul een geldig e-mailadres in.')
+        fouten.append(_('Vul een geldig e-mailadres in.'))
     return fouten
 
 
@@ -155,7 +165,7 @@ def bestelling():
 def bestelling_betaal():
     data = session.get('bestelling_data')
     if not data:
-        flash('Geen bestelgegevens gevonden. Vul het formulier opnieuw in.', 'warning')
+        flash(_('Geen bestelgegevens gevonden. Vul het formulier opnieuw in.'), 'warning')
         return redirect(url_for('shop.winkelwagen'))
     wagen = session.get('winkelwagen', {})
     items = []
@@ -214,7 +224,7 @@ def bestelling_bevestig():
 
     session.pop('winkelwagen', None)
     session.pop('bestelling_data', None)
-    flash(f'Order geplaatst, bedankt {klant_naam}! 🎉', 'success')
+    flash(_('Order geplaatst, bedankt %(naam)s! 🎉', naam=klant_naam), 'success')
     return redirect(url_for('shop.shop'))
 
 
@@ -226,12 +236,12 @@ def doneer():
         bericht = request.form.get('bericht', '').strip()
         eigen_bedrag = request.form.get('eigen_bedrag', '').strip()
         if not eigen_bedrag:
-            flash('Vul een bedrag in.', 'warning')
+            flash(_('Vul een bedrag in.'), 'warning')
             return redirect(url_for('shop.doneer'))
         try:
             bedrag = float(eigen_bedrag.replace(',', '.'))
         except ValueError:
-            flash('Vul een geldig bedrag in.', 'warning')
+            flash(_('Vul een geldig bedrag in.'), 'warning')
             return redirect(url_for('shop.doneer'))
         session['donatie'] = {
             'naam': naam, 'email': email,
@@ -246,7 +256,7 @@ def doneer():
 def donatie_betaal():
     donatie = session.get('donatie')
     if not donatie:
-        flash('Geen donatie gevonden. Vul het formulier opnieuw in.', 'warning')
+        flash(_('Geen donatie gevonden. Vul het formulier opnieuw in.'), 'warning')
         return redirect(url_for('shop.doneer'))
     return render_template('betaal_donatie.html',
         naam=donatie['naam'], email=donatie['email'],
@@ -260,7 +270,7 @@ def donatie_bevestig():
     from app.models import Donatie
     donatie_data = session.get('donatie')
     if not donatie_data:
-        flash('Geen donatie gevonden.', 'warning')
+        flash(_('Geen donatie gevonden.'), 'warning')
         return redirect(url_for('shop.doneer'))
     donatie = Donatie(
         naam=donatie_data['naam'], email=donatie_data['email'],
@@ -269,5 +279,25 @@ def donatie_bevestig():
     db.session.add(donatie)
     db.session.commit()
     session.pop('donatie', None)
-    flash(f'Dankjewel {donatie.naam}! 💜', 'success')
+    flash(_('Dankjewel %(naam)s! 💜', naam=donatie.naam), 'success')
     return redirect(url_for('shop.doneer'))
+
+
+@bp.route('/bestelling/status', methods=['GET', 'POST'])
+def bestelling_status():
+    order = None
+    gezocht = False
+    if request.method == 'POST':
+        gezocht = True
+        order_id = request.form.get('order_id', '').strip()
+        klant_email = request.form.get('klant_email', '').strip()
+        if order_id and klant_email:
+            try:
+                order = Order.query.filter_by(id=int(order_id), klant_email=klant_email).first()
+            except (ValueError, TypeError):
+                order = None
+            if not order:
+                flash(_('Geen bestelling gevonden met dit ordernummer en e-mailadres.'), 'warning')
+        else:
+            flash(_('Vul zowel je ordernummer als e-mailadres in.'), 'warning')
+    return render_template('bestelling_status.html', order=order, gezocht=gezocht)

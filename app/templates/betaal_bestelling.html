@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Betalen — Little Wings{% endblock %}
+{% block title %}{{ _('Betalen') }} — Little Wings{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/betaal_bestelling.css') }}">
@@ -9,8 +9,8 @@
 
     <div class="betaal-header">
       <span class="cart-icon">🛒</span>
-      <h1>Jouw bestelling</h1>
-      <p>Controleer je gegevens en kies een betaalmethode</p>
+      <h1>{{ _('Jouw bestelling') }}</h1>
+      <p>{{ _('Controleer je gegevens en kies een betaalmethode') }}</p>
     </div>
 
     <div class="donatie-overzicht">
@@ -21,7 +21,6 @@
       <div class="do-bedrag">€{{ totaal_str }}</div>
     </div>
 
-    <!-- Producten overzicht -->
     <div class="producten-lijst">
       {% for item in items %}
       <div class="product-rij">
@@ -29,14 +28,14 @@
         <span>€{{ "%.2f"|format(item.subtotaal) }}</span>
       </div>
       {% endfor %}
-      
+
       <div class="verzending-rij">
-        <span>Verzending</span>
+        <span>{{ _('Verzending') }}</span>
         <span>{{ verzending }}</span>
       </div>
-      
+
       <div class="totaal-rij">
-        <span class="label">Totaal</span>
+        <span class="label">{{ _('Totaal') }}</span>
         <span class="waarde">€{{ totaal_str }}</span>
       </div>
     </div>
@@ -53,7 +52,7 @@
       <input type="hidden" name="verzending" value="{{ verzending }}">
 
       <div class="betaal-methoden">
-        <h3>Betaalmethode</h3>
+        <h3>{{ _('Betaalmethode') }}</h3>
         <div class="methode-opties">
 
           <label class="methode-optie">
@@ -61,7 +60,7 @@
             <img src="{{ url_for('static', filename='img/ideal-logo.png') }}" alt="iDEAL" class="methode-logo">
             <div>
               <div class="methode-naam">iDEAL</div>
-              <div class="methode-sub">Betaal via jouw bank</div>
+              <div class="methode-sub">{{ _('Betaal via jouw bank') }}</div>
             </div>
           </label>
 
@@ -79,7 +78,7 @@
             <img src="{{ url_for('static', filename='img/paypal-logo.png') }}" alt="PayPal" class="methode-logo">
             <div>
               <div class="methode-naam">PayPal</div>
-              <div class="methode-sub">Betaal met je PayPal account</div>
+              <div class="methode-sub">{{ _('Betaal met je PayPal account') }}</div>
             </div>
           </label>
 
@@ -87,15 +86,15 @@
       </div>
 
       <button type="submit" class="betaal-knop">
-        ✅ Betaal €{{ totaal_str }}
+        ✅ {{ _('Betaal') }} €{{ totaal_str }}
       </button>
 
     </form>
 
-    <a href="{{ url_for('shop.winkelwagen') }}" class="terug-link">← Terug naar winkelwagen</a>
+    <a href="{{ url_for('shop.winkelwagen') }}" class="terug-link">← {{ _('Terug naar winkelwagen') }}</a>
 
     <div class="veilig-badge">
-      🔒 Veilig en versleuteld betalen
+      🔒 {{ _('Veilig en versleuteld betalen') }}
     </div>
 
   </div>

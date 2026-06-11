@@ -2,6 +2,7 @@ import csv
 import io
 import os
 from flask import Blueprint, render_template, redirect, request, url_for, flash, abort, current_app, make_response
+from flask_babel import _
 from werkzeug.utils import secure_filename
 from app import db
 from app.models import Product, Order
@@ -49,7 +50,7 @@ def admin_add_product():
     foto = _sla_foto_op(request.files.get('foto_bestand')) or request.form.get('foto') or None
     db.session.add(Product(naam=naam, beschrijving=beschrijving, prijs=prijs, voorraad=voorraad, foto=foto))
     db.session.commit()
-    flash(f'Product "{naam}" toegevoegd!', 'success')
+    flash(_('Product "%(naam)s" toegevoegd!', naam=naam), 'success')
     return redirect(url_for('admin.admin'))
 
 
@@ -67,7 +68,7 @@ def admin_wijzig_product(product_id):
         or None
     )
     db.session.commit()
-    flash(f'Product "{product.naam}" bijgewerkt!', 'success')
+    flash(_('Product "%(naam)s" bijgewerkt!', naam=product.naam), 'success')
     return redirect(url_for('admin.admin'))
 
 
@@ -78,7 +79,7 @@ def admin_verwijder_product(product_id):
     naam = product.naam
     db.session.delete(product)
     db.session.commit()
-    flash(f'Product "{naam}" verwijderd.', 'success')
+    flash(_('Product "%(naam)s" verwijderd.', naam=naam), 'success')
     return redirect(url_for('admin.admin'))
 
 
@@ -88,10 +89,10 @@ def admin_uitverkocht(product_id):
     product = db.session.get(Product, product_id) or abort(404)
     if product.voorraad == 0:
         product.voorraad = 10
-        flash(f'"{product.naam}" terug op voorraad gezet (10 stuks).', 'success')
+        flash(_('"%(naam)s" terug op voorraad gezet (10 stuks).', naam=product.naam), 'success')
     else:
         product.voorraad = 0
-        flash(f'"{product.naam}" gemarkeerd als uitverkocht.', 'warning')
+        flash(_('"%(naam)s" gemarkeerd als uitverkocht.', naam=product.naam), 'warning')
     db.session.commit()
     return redirect(url_for('admin.admin'))
 
@@ -143,5 +144,5 @@ def admin_verwijder_order(order_id):
     order = db.session.get(Order, order_id) or abort(404)
     db.session.delete(order)
     db.session.commit()
-    flash('Order verwijderd.', 'success')
+    flash(_('Order verwijderd.'), 'success')
     return redirect(url_for('admin.admin'))

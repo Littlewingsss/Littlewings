@@ -1,16 +1,22 @@
 import os
-from flask import Flask
+from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from flask_mail import Mail
+from flask_babel import Babel, get_locale
 
 migrate = Migrate()
 db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
 mail = Mail()
+babel = Babel()
+
+
+def _get_locale():
+    return session.get('lang', 'nl')
 
 def create_app():
     app = Flask(__name__)
@@ -30,12 +36,18 @@ def create_app():
         os.environ.get('MAIL_DEFAULT_SENDER') or os.environ.get('MAIL_USERNAME') or None
     )
 
+    app.config['BABEL_DEFAULT_LOCALE'] = 'nl'
+    app.config['BABEL_SUPPORTED_LOCALES'] = ['nl', 'en']
+
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.index'
     migrate.init_app(app, db)
     csrf.init_app(app)
     mail.init_app(app)
+    babel.init_app(app, locale_selector=_get_locale)
+
+    app.jinja_env.globals['get_locale'] = _get_locale
 
     from app.blueprints.auth import bp as auth_bp
     from app.blueprints.shop import bp as shop_bp

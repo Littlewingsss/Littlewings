@@ -1356,6 +1356,83 @@ body {
 .edit-form-row td { background: #faf5ff !important; padding: 1.2rem !important; }
 
 
+/* ── TAALWISSELAAR ── */
+.nav-lang {
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 6px;
+  padding: .2rem .55rem !important;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  transition: background .15s, border-color .15s;
+}
+.nav-lang:hover {
+  background: rgba(255,255,255,.15) !important;
+  border-color: rgba(255,255,255,.6);
+}
+
+/* ── SHOP ZOEKBALK ── */
+.shop-zoek-form {
+  display: flex;
+  gap: .5rem;
+  margin-top: 1.5rem;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shop-zoek-input {
+  flex: 1;
+  padding: .65rem 1rem;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: .95rem;
+  background: rgba(255,255,255,.92);
+  color: #1e1b4b;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.shop-zoek-input:focus {
+  box-shadow: 0 0 0 3px rgba(124,58,237,.35);
+}
+
+.shop-zoek-knop {
+  padding: .65rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  color: #7c3aed;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  transition: background .2s, color .2s;
+}
+
+.shop-zoek-knop:hover {
+  background: #7c3aed;
+  color: #fff;
+}
+
+.shop-zoek-resultaat {
+  margin-top: .75rem;
+  font-size: .9rem;
+  color: rgba(255,255,255,.85);
+}
+
+.shop-zoek-wis {
+  color: #e9d5ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.shop-zoek-wis:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .about-container  { padding: 30px 4%; }

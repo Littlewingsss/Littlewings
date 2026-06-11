@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Serverfout — Little Wings{% endblock %}
+{% block title %}{{ _('Serverfout') }} — Little Wings{% endblock %}
 {% block content %}
 <div class="error-page">
   <div class="error-card">
     <div class="error-code">500</div>
     <div class="error-icon">⚙️</div>
-    <h1 class="error-title">Er ging iets mis</h1>
+    <h1 class="error-title">{{ _('Er ging iets mis') }}</h1>
     <p class="error-msg">
-      Er is een onverwachte fout opgetreden aan onze kant.<br>
-      Probeer het opnieuw of kom later terug.
+      {{ _('Er is een onverwachte fout opgetreden aan onze kant.') }}<br>
+      {{ _('Probeer het opnieuw of kom later terug.') }}
     </p>
     <div class="error-knoppen">
-      <a href="{{ url_for('shop.shop') }}" class="knop-teal">🛍️ Naar de shop</a>
-      <a href="{{ url_for('auth.index') }}" class="error-knop-sec">← Terug naar home</a>
+      <a href="{{ url_for('shop.shop') }}" class="knop-teal">🛍️ {{ _('Naar de shop') }}</a>
+      <a href="{{ url_for('auth.index') }}" class="error-knop-sec">← {{ _('Terug naar home') }}</a>
     </div>
   </div>
 </div>

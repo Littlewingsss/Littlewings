@@ -9,26 +9,26 @@
     <span style="font-size:2rem">🛠️</span>
     <div>
       <h1>Admin Dashboard</h1>
-      <div style="font-size:.9rem;opacity:.85">Little Wings beheerPanel</div>
+      <div style="font-size:.9rem;opacity:.85">Little Wings {{ _('beheerPanel') }}</div>
     </div>
   </div>
 
   <div class="stats-row">
     <div class="stat-box">
       <div class="num">{{ producten|length }}</div>
-      <div class="lbl">Producten</div>
+      <div class="lbl">{{ _('Producten') }}</div>
     </div>
     <div class="stat-box">
       <div class="num">{{ orders|length }}</div>
-      <div class="lbl">Orders</div>
+      <div class="lbl">{{ _('Orders') }}</div>
     </div>
     <div class="stat-box" style="border-color:var(--teal)">
       <div class="num" style="color:var(--teal)">{{ producten|selectattr('voorraad','eq',0)|list|length }}</div>
-      <div class="lbl">Uitverkocht</div>
+      <div class="lbl">{{ _('Uitverkocht') }}</div>
     </div>
     <div class="stat-box" style="border-color:var(--gold)">
       <div class="num" style="color:#b8860b">{{ donaties|length }}</div>
-      <div class="lbl">Donaties</div>
+      <div class="lbl">{{ _('Donaties') }}</div>
     </div>
   </div>
 
@@ -37,10 +37,10 @@
   <div style="background:#fffbeb;border:1px solid #fcd34d;border-left:4px solid #f59e0b;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:flex-start">
     <span style="font-size:1.3rem;line-height:1">⚠️</span>
     <div>
-      <strong style="color:#92400e">Lage voorraad</strong>
+      <strong style="color:#92400e">{{ _('Lage voorraad') }}</strong>
       <ul style="margin:.35rem 0 0 1.1rem;padding:0;color:#78350f;font-size:.9rem">
         {% for p in lage_voorraad %}
-        <li>{{ p.naam }} — nog <strong>{{ p.voorraad }}</strong> stuk{{ 'ken' if p.voorraad != 1 else '' }} over</li>
+        <li>{{ p.naam }} — {{ _('nog') }} <strong>{{ p.voorraad }}</strong> {{ _('stuk') }}{{ 'ken' if p.voorraad != 1 else '' }} {{ _('over') }}</li>
         {% endfor %}
       </ul>
     </div>
@@ -48,72 +48,77 @@
   {% endif %}
 
   <div class="admin-tabs">
-    <a href="#producten" class="admin-tab {% if tab == 'producten' or not tab %}active{% endif %}">📦 Producten</a>
-    <a href="#orders" class="admin-tab {% if tab == 'orders' %}active{% endif %}">🛒 Orders</a>
-    <a href="#donaties" class="admin-tab {% if tab == 'donaties' %}active{% endif %}">💜 Donaties</a>
-    <a href="#nieuw" class="admin-tab {% if tab == 'nieuw' %}active{% endif %}">➕ Nieuw product</a>
+    <a href="#producten" class="admin-tab {% if tab == 'producten' or not tab %}active{% endif %}">📦 {{ _('Producten') }}</a>
+    <a href="#orders" class="admin-tab {% if tab == 'orders' %}active{% endif %}">🛒 {{ _('Orders') }}</a>
+    <a href="#donaties" class="admin-tab {% if tab == 'donaties' %}active{% endif %}">💜 {{ _('Donaties') }}</a>
+    <a href="#nieuw" class="admin-tab {% if tab == 'nieuw' %}active{% endif %}">➕ {{ _('Nieuw product') }}</a>
   </div>
 
   <!-- ======== PRODUCTEN ======== -->
   <div id="producten" class="admin-section">
     <div class="admin-card">
-      <h2>📦 Alle producten</h2>
+      <h2>📦 {{ _('Alle producten') }}</h2>
       {% if producten %}
       <div style="overflow-x:auto">
         <table class="admin-table">
           <thead>
             <tr>
-              <th>ID</th><th>Naam</th><th>Prijs</th><th>Voorraad</th><th>Status</th><th>Acties</th>
+              <th>ID</th>
+              <th>{{ _('Naam') }}</th>
+              <th>{{ _('Prijs') }}</th>
+              <th>{{ _('Voorraad') }}</th>
+              <th>{{ _('Status') }}</th>
+              <th>{{ _('Acties') }}</th>
             </tr>
           </thead>
           <tbody>
             {% for p in producten %}
 
             {% if edit_id == p.id %}
-            
+
             <tr class="edit-form-row">
               <td colspan="6">
-                <strong style="color:var(--primary);display:block;margin-bottom:.8rem">✏️ Product #{{ p.id }} wijzigen</strong>
+                <strong style="color:var(--primary);display:block;margin-bottom:.8rem">✏️ {{ _('Product') }} #{{ p.id }} {{ _('wijzigen') }}</strong>
                 <form method="POST" action="{{ url_for('admin.admin_wijzig_product', product_id=p.id) }}" class="admin-form" enctype="multipart/form-data">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <div class="form-row">
                     <div>
-                      <label>Naam</label>
+                      <label>{{ _('Naam') }}</label>
                       <input type="text" name="naam" value="{{ p.naam }}" required>
                     </div>
                     <div>
-                      <label>Prijs (€)</label>
+                      <label>{{ _('Prijs') }} (€)</label>
                       <input type="number" name="prijs" step="0.01" min="0" value="{{ '%.2f'|format(p.prijs) }}" required>
                     </div>
                   </div>
                   <div class="form-row">
                     <div>
-                      <label>Voorraad</label>
+                      <label>{{ _('Voorraad') }}</label>
                       <input type="number" name="voorraad" min="0" value="{{ p.voorraad }}">
                     </div>
                     <div>
-                      <label>Foto uploaden</label>
+                      <label>{{ _('Foto uploaden') }}</label>
                       <input type="file" name="foto_bestand" accept="image/png,image/jpeg,image/gif,image/webp">
                       {% if p.foto %}
-                        <small style="color:var(--text-light)">Huidig: {{ p.foto }}</small>
+                        <small style="color:var(--text-light)">{{ _('Huidig') }}: {{ p.foto }}</small>
                       {% endif %}
-                      <input type="text" name="foto" value="{{ p.foto or '' }}" placeholder="Of bestandsnaam, bijv. hoodie.png" style="margin-top:.3rem">
+                      <input type="text" name="foto" value="{{ p.foto or '' }}" placeholder="{{ _('Of bestandsnaam, bijv. hoodie.png') }}" style="margin-top:.3rem">
                     </div>
                   </div>
                   <div>
-                    <label>Beschrijving</label>
+                    <label>{{ _('Beschrijving') }}</label>
                     <textarea name="beschrijving" rows="2">{{ p.beschrijving or '' }}</textarea>
                   </div>
                   <div style="display:flex;gap:.5rem;margin-top:.3rem;flex-wrap:wrap">
-                    <button type="submit" class="btn-primary">💾 Opslaan</button>
-                    <a href="{{ url_for('admin.admin') }}" class="btn-warning">✕ Annuleer</a>
+                    <button type="submit" class="btn-primary">💾 {{ _('Opslaan') }}</button>
+                    <a href="{{ url_for('admin.admin') }}" class="btn-warning">✕ {{ _('Annuleer') }}</a>
                   </div>
                 </form>
               </td>
             </tr>
 
             {% else %}
-            
+
             <tr>
               <td>#{{ p.id }}</td>
               <td>
@@ -126,21 +131,21 @@
               <td>{{ p.voorraad }}</td>
               <td>
                 {% if p.voorraad == 0 %}
-                  <span class="badge-uitverkocht">Uitverkocht</span>
+                  <span class="badge-uitverkocht">{{ _('Uitverkocht') }}</span>
                 {% else %}
-                  <span class="badge-beschikbaar">Beschikbaar</span>
+                  <span class="badge-beschikbaar">{{ _('Beschikbaar') }}</span>
                 {% endif %}
               </td>
               <td>
                 <div class="actions">
-                  <a href="{{ url_for('admin.admin', edit_id=p.id) }}#producten" class="btn-warning">✏️ Wijzig</a>
+                  <a href="{{ url_for('admin.admin', edit_id=p.id) }}#producten" class="btn-warning">✏️ {{ _('Wijzig') }}</a>
 
                   <form method="POST" action="{{ url_for('admin.admin_uitverkocht', product_id=p.id) }}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     {% if p.voorraad == 0 %}
-                      <button type="submit" class="btn-groen">✅ Herstel</button>
+                      <button type="submit" class="btn-groen">✅ {{ _('Herstel') }}</button>
                     {% else %}
-                      <button type="submit" class="btn-oranje">🚫 Uitverkocht</button>
+                      <button type="submit" class="btn-oranje">🚫 {{ _('Uitverkocht') }}</button>
                     {% endif %}
                   </form>
 
@@ -159,7 +164,7 @@
       </div>
       {% else %}
         <p style="color:var(--text-light);text-align:center;padding:2rem">
-          Nog geen producten. <a href="#nieuw" style="color:var(--primary)">Voeg er één toe ➕</a>
+          {{ _('Nog geen producten.') }} <a href="#nieuw" style="color:var(--primary)">{{ _('Voeg er één toe') }} ➕</a>
         </p>
       {% endif %}
     </div>
@@ -169,19 +174,18 @@
   <div id="orders" class="admin-section">
     <div class="admin-card">
       <h2 style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
-        <span>🛒 Alle orders</span>
+        <span>🛒 {{ _('Alle orders') }}</span>
         <a href="{{ url_for('admin.admin_export_orders') }}" class="btn-primary" style="font-size:.85rem;padding:.45rem 1rem;text-decoration:none">
-          📥 Exporteer CSV
+          📥 {{ _('Exporteer CSV') }}
         </a>
       </h2>
       {% if orders %}
       <div style="overflow-x:auto">
         {% for order in orders %}
         <div style="border:1px solid var(--border);border-radius:10px;margin-bottom:1.5rem;overflow:hidden">
-          <!-- Order header -->
           <div style="background:var(--surface);padding:.9rem 1.2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
             <div>
-              <strong style="color:var(--primary);font-size:1.05rem">Order #{{ order.id }}</strong>
+              <strong style="color:var(--primary);font-size:1.05rem">{{ _('Order') }} #{{ order.id }}</strong>
               &nbsp;·&nbsp;
               <strong>{{ order.klant_naam }}</strong>
               &nbsp;·&nbsp;
@@ -189,20 +193,18 @@
             </div>
             <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap">
               <span style="color:var(--text-light);font-size:.85rem">{{ order.besteld_op.strftime('%d-%m-%Y %H:%M') }}</span>
-              <span class="badge-beschikbaar">Nieuw</span>
+              <span class="badge-beschikbaar">{{ _('Nieuw') }}</span>
               <form method="POST" action="{{ url_for('admin.admin_verwijder_order', order_id=order.id) }}">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn-danger">🗑️ Verwijder</button>
+                <button type="submit" class="btn-danger">🗑️ {{ _('Verwijder') }}</button>
               </form>
             </div>
           </div>
 
-          <!-- Order details + producten -->
           <div style="padding:1rem 1.2rem;display:flex;flex-wrap:wrap;gap:1.5rem">
 
-            <!-- Klantinfo -->
             <div style="min-width:200px;flex:1">
-              <div style="font-size:.8rem;color:var(--text-light);margin-bottom:.4rem;font-weight:600;text-transform:uppercase">Klantgegevens</div>
+              <div style="font-size:.8rem;color:var(--text-light);margin-bottom:.4rem;font-weight:600;text-transform:uppercase">{{ _('Klantgegevens') }}</div>
               {% if order.telefoon %}<div>📞 {{ order.telefoon }}</div>{% endif %}
               {% if order.straat %}
               <div>📍 {{ order.straat }}, {{ order.postcode }} {{ order.stad }}</div>
@@ -211,22 +213,21 @@
               <div style="margin-top:.5rem">📦 {{ order.verzendmethode or '-' }} &nbsp;|&nbsp; 💳 {{ order.betaalmethode or '-' }}</div>
             </div>
 
-            <!-- Producten in deze order -->
             <div style="flex:2;min-width:260px">
-              <div style="font-size:.8rem;color:var(--text-light);margin-bottom:.4rem;font-weight:600;text-transform:uppercase">Producten</div>
+              <div style="font-size:.8rem;color:var(--text-light);margin-bottom:.4rem;font-weight:600;text-transform:uppercase">{{ _('Producten') }}</div>
               <table style="width:100%;border-collapse:collapse">
                 <thead>
                   <tr style="font-size:.82rem;color:var(--text-light)">
-                    <th style="text-align:left;padding:.3rem .5rem">Product</th>
-                    <th style="text-align:center;padding:.3rem .5rem">Aantal</th>
-                    <th style="text-align:right;padding:.3rem .5rem">Stukprijs</th>
-                    <th style="text-align:right;padding:.3rem .5rem">Subtotaal</th>
+                    <th style="text-align:left;padding:.3rem .5rem">{{ _('Product') }}</th>
+                    <th style="text-align:center;padding:.3rem .5rem">{{ _('Aantal') }}</th>
+                    <th style="text-align:right;padding:.3rem .5rem">{{ _('Stukprijs') }}</th>
+                    <th style="text-align:right;padding:.3rem .5rem">{{ _('Subtotaal') }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for regel in order.regels %}
                   <tr style="border-top:1px solid var(--border)">
-                    <td style="padding:.4rem .5rem">{{ regel.product.naam if regel.product else '(verwijderd)' }}</td>
+                    <td style="padding:.4rem .5rem">{{ regel.product.naam if regel.product else _('(verwijderd)') }}</td>
                     <td style="text-align:center;padding:.4rem .5rem">{{ regel.aantal }}×</td>
                     <td style="text-align:right;padding:.4rem .5rem">€{{ '%.2f'|format(regel.prijs_per_stuk) }}</td>
                     <td style="text-align:right;padding:.4rem .5rem">€{{ '%.2f'|format(regel.prijs_per_stuk * regel.aantal) }}</td>
@@ -235,7 +236,7 @@
                 </tbody>
                 <tfoot>
                   <tr style="border-top:2px solid var(--border);font-weight:700">
-                    <td colspan="3" style="text-align:right;padding:.5rem .5rem">Totaal:</td>
+                    <td colspan="3" style="text-align:right;padding:.5rem .5rem">{{ _('Totaal') }}:</td>
                     <td style="text-align:right;padding:.5rem .5rem;color:var(--primary)">€{{ '%.2f'|format(order.totaal()) }}</td>
                   </tr>
                 </tfoot>
@@ -247,22 +248,26 @@
         {% endfor %}
       </div>
       {% else %}
-        <p style="color:var(--text-light);text-align:center;padding:2rem">Nog geen orders.</p>
+        <p style="color:var(--text-light);text-align:center;padding:2rem">{{ _('Nog geen orders.') }}</p>
       {% endif %}
     </div>
   </div>
 
-  <!-- ======== NIEUW PRODUCT ======== -->
-   <!-- ======== DONATIES ======== -->
+  <!-- ======== DONATIES ======== -->
   <div id="donaties" class="admin-section">
     <div class="admin-card">
-      <h2>💜 Alle donaties</h2>
+      <h2>💜 {{ _('Alle donaties') }}</h2>
       {% if donaties %}
       <div style="overflow-x:auto">
         <table class="admin-table">
           <thead>
             <tr>
-              <th>ID</th><th>Naam</th><th>E-mail</th><th>Bedrag</th><th>Bericht</th><th>Datum</th>
+              <th>ID</th>
+              <th>{{ _('Naam') }}</th>
+              <th>{{ _('E-mail') }}</th>
+              <th>{{ _('Bedrag') }}</th>
+              <th>{{ _('Bericht') }}</th>
+              <th>{{ _('Datum') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -277,7 +282,7 @@
             </tr>
             {% endfor %}
             <tr style="font-weight:800; border-top:2px solid var(--border)">
-              <td colspan="3" style="text-align:right; padding:.5rem">Totaal ontvangen:</td>
+              <td colspan="3" style="text-align:right; padding:.5rem">{{ _('Totaal ontvangen') }}:</td>
               <td style="color:var(--primary)">€ {{ "%.2f"|format(donaties|sum(attribute='bedrag')) }}</td>
               <td colspan="2"></td>
             </tr>
@@ -285,41 +290,43 @@
         </table>
       </div>
       {% else %}
-        <p style="color:var(--text-light);text-align:center;padding:2rem">Er zijn nog geen donaties ontvangen.</p>
+        <p style="color:var(--text-light);text-align:center;padding:2rem">{{ _('Er zijn nog geen donaties ontvangen.') }}</p>
       {% endif %}
     </div>
   </div>
+
+  <!-- ======== NIEUW PRODUCT ======== -->
   <div id="nieuw" class="admin-section">
     <div class="admin-card">
-      <h2>➕ Nieuw product toevoegen</h2>
+      <h2>➕ {{ _('Nieuw product toevoegen') }}</h2>
       <form method="POST" action="{{ url_for('admin.admin_add_product') }}" class="admin-form" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div>
-          <label>Productnaam *</label>
-          <input type="text" name="naam" required placeholder="bijv. Gano7 Hoodie">
+          <label>{{ _('Productnaam') }} *</label>
+          <input type="text" name="naam" required placeholder="{{ _('bijv. Gano7 Hoodie') }}">
         </div>
         <div>
-          <label>Beschrijving</label>
-          <textarea name="beschrijving" rows="3" placeholder="Omschrijving van het product…"></textarea>
+          <label>{{ _('Beschrijving') }}</label>
+          <textarea name="beschrijving" rows="3" placeholder="{{ _('Omschrijving van het product…') }}"></textarea>
         </div>
         <div class="form-row">
           <div>
-            <label>Prijs (€) *</label>
+            <label>{{ _('Prijs') }} (€) *</label>
             <input type="number" name="prijs" step="0.01" min="0" required placeholder="0.00">
           </div>
           <div>
-            <label>Voorraad</label>
+            <label>{{ _('Voorraad') }}</label>
             <input type="number" name="voorraad" min="0" value="0">
           </div>
         </div>
         <div>
-          <label>Foto uploaden</label>
+          <label>{{ _('Foto uploaden') }}</label>
           <input type="file" name="foto_bestand" accept="image/png,image/jpeg,image/gif,image/webp">
-          <small style="color:var(--text-light)">Of vul een bestaande bestandsnaam in:</small>
-          <input type="text" name="foto" placeholder="bijv. hoodie.png" style="margin-top:.3rem">
+          <small style="color:var(--text-light)">{{ _('Of vul een bestaande bestandsnaam in') }}:</small>
+          <input type="text" name="foto" placeholder="{{ _('bijv. hoodie.png') }}" style="margin-top:.3rem">
         </div>
         <button type="submit" class="btn-primary" style="justify-self:start;margin-top:.5rem">
-          ➕ Product toevoegen
+          ➕ {{ _('Product toevoegen') }}
         </button>
       </form>
     </div>

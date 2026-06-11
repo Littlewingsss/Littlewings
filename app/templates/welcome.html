@@ -1,25 +1,42 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="{{ get_locale() }}">
 <head>
     <link rel="icon"  href="{{ url_for('static', filename='img/logo.jpg')}}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Wings — Welkom</title>
+    <title>Little Wings — {{ _('Welkom') }}</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
+    <!-- Taalwisselaar (buiten navbar) -->
+    <div style="position:fixed;top:1rem;right:1rem;z-index:1000">
+      {% if get_locale() == 'nl' %}
+        <a href="{{ url_for('auth.set_language', lang='en') }}"
+           style="background:rgba(0,0,0,.55);color:#fff;padding:.35rem .75rem;border-radius:8px;
+                  text-decoration:none;font-family:Nunito,sans-serif;font-size:.85rem;font-weight:700">
+          🇬🇧 EN
+        </a>
+      {% else %}
+        <a href="{{ url_for('auth.set_language', lang='nl') }}"
+           style="background:rgba(0,0,0,.55);color:#fff;padding:.35rem .75rem;border-radius:8px;
+                  text-decoration:none;font-family:Nunito,sans-serif;font-size:.85rem;font-weight:700">
+          🇳🇱 NL
+        </a>
+      {% endif %}
+    </div>
+
     <div class="welcome-page">
         <div class="welcome-login-box">
             <div class="welcome-header">
-                <img  src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Little Wings"/>
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Little Wings"/>
                 <h1>LITTLE <span>WINGS</span></h1>
                 <p>PLAY · HEAL · FLY</p>
             </div>
             <div class="mission">
-                <p>🕊️ Met elke aankoop steun je <strong>kinderen getroffen door oorlog</strong> over de hele wereld — samen geven we hen vleugels.</p>
+                <p>🕊️ {{ _('Met elke aankoop steun je kinderen getroffen door oorlog over de hele wereld — samen geven we hen vleugels.') }}</p>
             </div>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -30,29 +47,32 @@
             {% endwith %}
             <div class="inreg-tabel">
                 <div class="auth-tabs">
-                    <button class="auth-tab on" onclick="switchTab('login', this)">Inloggen</button>
-                    <button class="auth-tab" onclick="switchTab('register', this)">Registreren</button>
+                    <button class="auth-tab on" onclick="switchTab('login', this)">{{ _('Inloggen') }}</button>
+                    <button class="auth-tab" onclick="switchTab('register', this)">{{ _('Registreren') }}</button>
                 </div>
                 <div class="form-wrap">
                     <form class="auth-form on" id="loginForm" action="{{ url_for('auth.login') }}" method="POST">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                        <label>E-mailadres</label>
-                        <input type="email" name="email" placeholder="jouw@email.nl" required/>
-                        <label>Wachtwoord</label>
+                        <label>{{ _('E-mailadres') }}</label>
+                        <input type="email" name="email" placeholder="{{ _('jouw@email.nl') }}" required/>
+                        <label>{{ _('Wachtwoord') }}</label>
                         <input type="password" name="password" placeholder="••••••••" required/>
-                        <button type="submit" class="auth-submit">Inloggen</button>
+                        <button type="submit" class="auth-submit">{{ _('Inloggen') }}</button>
+                        <p style="text-align:center;margin-top:.75rem;font-size:.88rem">
+                          <a href="{{ url_for('auth.wachtwoord_vergeten') }}" style="color:#7c3aed">{{ _('Wachtwoord vergeten?') }}</a>
+                        </p>
                     </form>
                     <form class="auth-form" id="registerForm" action="{{ url_for('auth.register') }}" method="POST">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                        <label>Gebruikersnaam</label>
-                        <input type="text" name="username" placeholder="Jouw gebruikersnaam" required/>
-                        <label>E-mailadres</label>
-                        <input type="email" name="email" placeholder="jouw@email.nl" required/>
-                        <label>Wachtwoord</label>
-                        <input type="password" name="password" placeholder="Kies een wachtwoord" required/>
-                        <label>Bevestig wachtwoord</label>
-                        <input type="password" name="confirm_password" placeholder="Herhaal je wachtwoord" required/>
-                        <button type="submit" class="auth-submit">Account aanmaken</button>
+                        <label>{{ _('Gebruikersnaam') }}</label>
+                        <input type="text" name="username" placeholder="{{ _('Jouw gebruikersnaam') }}" required/>
+                        <label>{{ _('E-mailadres') }}</label>
+                        <input type="email" name="email" placeholder="{{ _('jouw@email.nl') }}" required/>
+                        <label>{{ _('Wachtwoord') }}</label>
+                        <input type="password" name="password" placeholder="{{ _('Kies een wachtwoord') }}" required/>
+                        <label>{{ _('Bevestig wachtwoord') }}</label>
+                        <input type="password" name="confirm_password" placeholder="{{ _('Herhaal je wachtwoord') }}" required/>
+                        <button type="submit" class="auth-submit">{{ _('Account aanmaken') }}</button>
                     </form>
                 </div>
             </div>

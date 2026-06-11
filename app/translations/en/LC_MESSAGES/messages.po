@@ -1,0 +1,688 @@
+# English translations for Little Wings.
+# Copyright (C) 2026 Little Wings
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Little Wings\n"
+"POT-Creation-Date: 2026-06-11 16:35+0200\n"
+"PO-Revision-Date: 2026-06-11 16:35+0200\n"
+"Language: en\n"
+"Language-Team: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+msgid "€ 4,99"
+msgstr "€ 4.99"
+
+msgid "(verwijderd)"
+msgstr "(deleted)"
+
+#, python-format
+msgid "\"%(naam)s\" gemarkeerd als uitverkocht."
+msgstr "\"%(naam)s\" marked as sold out."
+
+#, python-format
+msgid "\"%(naam)s\" terug op voorraad gezet (10 stuks)."
+msgstr "\"%(naam)s\" restocked (10 units)."
+
+#, python-format
+msgid "%(label)s is verplicht."
+msgstr "%(label)s is required."
+
+#, python-format
+msgid "%(n)d resultaat voor"
+msgid_plural "%(n)d resultaten voor"
+msgstr[0] "%(n)d result for"
+msgstr[1] "%(n)d results for"
+
+msgid "100% winst naar kinderen"
+msgstr "100% profit to children"
+
+msgid "Aantal"
+msgstr "Quantity"
+
+msgid "Account aanmaken"
+msgstr "Create account"
+
+msgid "Acties"
+msgstr "Actions"
+
+msgid "Alle donaties"
+msgstr "All donations"
+
+msgid "Alle orders"
+msgstr "All orders"
+
+msgid "Alle producten"
+msgstr "All products"
+
+msgid "Als er een account bestaat met dit e-mailadres, ontvang je een resetlink."
+msgstr "If an account exists with this email address, you will receive a reset link."
+
+msgid "Annuleer"
+msgstr "Cancel"
+
+msgid "Bedrag"
+msgstr "Amount"
+
+msgid "beheerPanel"
+msgstr "Admin Panel"
+
+msgid "Bekijk de collectie"
+msgstr "View the collection"
+
+msgid "Bekijk en beheer je gekozen producten"
+msgstr "View and manage your selected products"
+
+msgid "België"
+msgstr "Belgium"
+
+msgid "Bepaal zelf jouw bijdrage 💜"
+msgstr "Set your own contribution 💜"
+
+msgid "Bericht (optioneel) 💬"
+msgstr "Message (optional) 💬"
+
+msgid "Bericht"
+msgstr "Message"
+
+msgid "Beschikbaar"
+msgstr "Available"
+
+msgid "Beschrijving"
+msgstr "Description"
+
+msgid "Besteldatum"
+msgstr "Order date"
+
+msgid "Bestelling opzoeken"
+msgstr "Look up order"
+
+msgid "Bestelling"
+msgstr "Order"
+
+msgid "Bestellingstatus"
+msgstr "Order status"
+
+msgid "Betaal met je PayPal account"
+msgstr "Pay with your PayPal account"
+
+msgid "Betaal via jouw bank"
+msgstr "Pay via your bank"
+
+msgid "Betaal"
+msgstr "Pay"
+
+msgid "Betaalmethode"
+msgstr "Payment method"
+
+msgid "Betalen"
+msgstr "Payment"
+
+msgid "Bevestig donatie van"
+msgstr "Confirm donation of"
+
+msgid "Bevestig wachtwoord"
+msgstr "Confirm password"
+
+msgid "Bezorgadres"
+msgstr "Delivery address"
+
+msgid "Bijna op!"
+msgstr "Almost out!"
+
+msgid "bijv. 06 12345678"
+msgstr "e.g. 06 12345678"
+
+msgid "bijv. 1234 AB"
+msgstr "e.g. 1234 AB"
+
+msgid "bijv. 15"
+msgstr "e.g. 15"
+
+msgid "bijv. 42"
+msgstr "e.g. 42"
+
+msgid "bijv. Amsterdam"
+msgstr "e.g. Amsterdam"
+
+msgid "bijv. Gano7 Hoodie"
+msgstr "e.g. Gano7 Hoodie"
+
+msgid "bijv. hoodie.png"
+msgstr "e.g. hoodie.png"
+
+msgid "bijv. Hoofdstraat 12"
+msgstr "e.g. Main Street 12"
+
+msgid "Blijf op de hoogte van onze missie en ontdek hoe jij kunt bijdragen"
+msgstr "Stay updated on our mission and discover how you can contribute"
+
+msgid "Controleer je gegevens en kies een betaalmethode"
+msgstr "Check your details and choose a payment method"
+
+msgid "Dank voor de registratie. Je kan nu inloggen!"
+msgstr "Thank you for registering. You can now log in!"
+
+#, python-format
+msgid "Dankjewel %(naam)s! 💜"
+msgstr "Thank you %(naam)s! 💜"
+
+msgid "Datum"
+msgstr "Date"
+
+msgid "Deze pagina bestaat niet of is verplaatst."
+msgstr "This page does not exist or has been moved."
+
+msgid "Deze resetlink is ongeldig of verlopen."
+msgstr "This reset link is invalid or expired."
+
+msgid "Donaties"
+msgstr "Donations"
+
+msgid "Doneer direct"
+msgstr "Donate now"
+
+msgid "Doneer ook"
+msgstr "Donate too"
+
+msgid "Doneer"
+msgstr "Donate"
+
+msgid "Duitsland"
+msgstr "Germany"
+
+msgid "Duurzame materialen"
+msgstr "Sustainable materials"
+
+msgid "E-mail"
+msgstr "Email"
+
+msgid "E-mailadres"
+msgstr "Email address"
+
+msgid "Elk product draagt bij aan onze missie - samen sterker"
+msgstr "Every product contributes to our mission - stronger together"
+
+msgid "Elke aankoop telt"
+msgstr "Every purchase counts"
+
+msgid "Email is al in gebruik!"
+msgstr "Email is already in use!"
+
+msgid "Er ging iets mis"
+msgstr "Something went wrong"
+
+msgid "Er is een onverwachte fout opgetreden aan onze kant."
+msgstr "An unexpected error occurred on our end."
+
+msgid "Er zijn nog geen donaties ontvangen."
+msgstr "No donations have been received yet."
+
+msgid "Er zijn nog geen producten beschikbaar."
+msgstr "There are no products available yet."
+
+msgid "Exporteer CSV"
+msgstr "Export CSV"
+
+msgid "Express (1-2 dagen) — €4,99"
+msgstr "Express (1-2 days) — €4.99"
+
+msgid "Express (€4,99)"
+msgstr "Express (€4.99)"
+
+msgid "Foto uploaden"
+msgstr "Upload photo"
+
+msgid "Gebruiker niet gevonden."
+msgstr "User not found."
+
+msgid "Gebruikersnaam is al in gebruik!"
+msgstr "Username is already taken!"
+
+msgid "Gebruikersnaam"
+msgstr "Username"
+
+msgid "Geen bestelgegevens gevonden. Vul het formulier opnieuw in."
+msgstr "No order details found. Please fill in the form again."
+
+msgid "Geen bestelling gevonden met dit ordernummer en e-mailadres."
+msgstr "No order found with this order number and email address."
+
+msgid "Geen donatie gevonden. Vul het formulier opnieuw in."
+msgstr "No donation found. Please fill in the form again."
+
+msgid "Geen donatie gevonden."
+msgstr "No donation found."
+
+#, python-format
+msgid "Geen producten gevonden voor \"%(term)s\""
+msgstr "No products found for \"%(term)s\""
+
+msgid "Geen toegang"
+msgstr "Access denied"
+
+msgid "Gratis verzending"
+msgstr "Free shipping"
+
+msgid "Gratis"
+msgstr "Free"
+
+msgid "Herhaal je wachtwoord"
+msgstr "Repeat your password"
+
+msgid "Herstel"
+msgstr "Restore"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Huidig"
+msgstr "Current"
+
+msgid "Inloggen"
+msgstr "Log in"
+
+msgid "Je bent nu uitgelogd!"
+msgstr "You are now logged out!"
+
+msgid "Je hebt geen toestemming om deze pagina te bekijken."
+msgstr "You do not have permission to view this page."
+
+msgid "Je winkelwagen is leeg."
+msgstr "Your cart is empty."
+
+msgid "Jouw bestelling"
+msgstr "Your order"
+
+msgid "Jouw donatie"
+msgstr "Your donation"
+
+msgid "Jouw gebruikersnaam"
+msgstr "Your username"
+
+msgid "Jouw gegevens"
+msgstr "Your details"
+
+msgid "Jouw selectie"
+msgstr "Your selection"
+
+msgid "jouw@email.nl"
+msgstr "your@email.com"
+
+msgid "Kies een land"
+msgstr "Choose a country"
+
+msgid "Kies een sterk wachtwoord van minimaal 6 tekens."
+msgstr "Choose a strong password of at least 6 characters."
+
+msgid "Kies een wachtwoord"
+msgstr "Choose a password"
+
+msgid "Kies verzending"
+msgstr "Choose shipping"
+
+msgid "Klantgegevens"
+msgstr "Customer details"
+
+msgid "Koop een shirt, steun een kind."
+msgstr "Buy a shirt, support a child."
+
+msgid "Koop een shirt, steun een kind. Elke aankoop gaat rechtstreeks naar kinderen die getroffen zijn door oorlog over de hele wereld."
+msgstr "Buy a shirt, support a child. Every purchase goes directly to children affected by war around the world."
+
+msgid "Lage voorraad"
+msgstr "Low stock"
+
+msgid "Land"
+msgstr "Country"
+
+msgid "Log in als admin om hier toegang toe te krijgen."
+msgstr "Log in as admin to get access here."
+
+msgid "Mijn bestelling"
+msgstr "My order"
+
+msgid "Minimaal 6 tekens"
+msgstr "At least 6 characters"
+
+msgid "Misschien vloog ze weg op haar eigen vleugels."
+msgstr "Maybe it flew away on its own wings."
+
+msgid "Naam"
+msgstr "Name"
+
+msgid "Naar de shop"
+msgstr "To the shop"
+
+msgid "Nederland"
+msgstr "Netherlands"
+
+#, python-format
+msgid "Niet genoeg voorraad! Er zijn nog maar %(n)d stuks beschikbaar."
+msgstr "Not enough stock! Only %(n)d units available."
+
+msgid "Nieuw product toevoegen"
+msgstr "Add new product"
+
+msgid "Nieuw product"
+msgstr "New product"
+
+msgid "Nieuw wachtwoord instellen"
+msgstr "Set new password"
+
+msgid "Nieuw wachtwoord"
+msgstr "New password"
+
+msgid "Nieuw"
+msgstr "New"
+
+msgid "Nog geen orders."
+msgstr "No orders yet."
+
+msgid "Nog geen producten."
+msgstr "No products yet."
+
+msgid "nog"
+msgstr "only"
+
+msgid "Of bestandsnaam, bijv. hoodie.png"
+msgstr "Or filename, e.g. hoodie.png"
+
+msgid "Of vul een bestaande bestandsnaam in"
+msgstr "Or enter an existing filename"
+
+msgid "Omschrijving van het product…"
+msgstr "Product description…"
+
+msgid "Onze collectie"
+msgstr "Our collection"
+
+msgid "Onze missie"
+msgstr "Our mission"
+
+msgid "Ophalen — Gratis"
+msgstr "Pick up — Free"
+
+msgid "Ophalen"
+msgstr "Pick up"
+
+msgid "Opslaan"
+msgstr "Save"
+
+msgid "opzoeken"
+msgstr "look up"
+
+#, python-format
+msgid "Order geplaatst, bedankt %(naam)s! 🎉"
+msgstr "Order placed, thank you %(naam)s! 🎉"
+
+msgid "Order verwijderd."
+msgstr "Order deleted."
+
+msgid "Order"
+msgstr "Order"
+
+msgid "Ordernummer"
+msgstr "Order number"
+
+msgid "Orders"
+msgstr "Orders"
+
+msgid "Over ons"
+msgstr "About us"
+
+msgid "over"
+msgstr "left"
+
+msgid "Pagina niet gevonden"
+msgstr "Page not found"
+
+msgid "Postcode"
+msgstr "Postal code"
+
+msgid "Prijs"
+msgstr "Price"
+
+msgid "Probeer het opnieuw of kom later terug."
+msgstr "Please try again or come back later."
+
+#, python-format
+msgid "Product \"%(naam)s\" bijgewerkt!"
+msgstr "Product \"%(naam)s\" updated!"
+
+#, python-format
+msgid "Product \"%(naam)s\" toegevoegd!"
+msgstr "Product \"%(naam)s\" added!"
+
+#, python-format
+msgid "Product \"%(naam)s\" verwijderd."
+msgstr "Product \"%(naam)s\" deleted."
+
+msgid "Product toegevoegd aan je winkelwagen! 🛒"
+msgstr "Product added to your cart! 🛒"
+
+msgid "Product toevoegen"
+msgstr "Add product"
+
+msgid "Product"
+msgstr "Product"
+
+msgid "Producten"
+msgstr "Products"
+
+msgid "Productnaam"
+msgstr "Product name"
+
+msgid "Registreren"
+msgstr "Register"
+
+msgid "Schrijf hier een berichtje..."
+msgstr "Write a message here..."
+
+msgid "Serverfout"
+msgstr "Server error"
+
+msgid "Shop"
+msgstr "Shop"
+
+msgid "Stad"
+msgstr "City"
+
+msgid "Standaard (3-5 dagen) — Gratis"
+msgstr "Standard (3-5 days) — Free"
+
+msgid "Standaard (gratis)"
+msgstr "Standard (free)"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Steun ons"
+msgstr "Support us"
+
+msgid "Straat en huisnummer"
+msgstr "Street and house number"
+
+msgid "stuk"
+msgstr "unit"
+
+msgid "Stukprijs"
+msgstr "Unit price"
+
+msgid "Stuur resetlink"
+msgstr "Send reset link"
+
+msgid "Subtotaal"
+msgstr "Subtotal"
+
+msgid "Succesvol ingelogd."
+msgstr "Successfully logged in."
+
+msgid "Telefoonnummer"
+msgstr "Phone number"
+
+msgid "Terug naar donatiepagina"
+msgstr "Back to donation page"
+
+msgid "Terug naar home"
+msgstr "Back to home"
+
+msgid "Terug naar inloggen"
+msgstr "Back to login"
+
+msgid "Terug naar winkelwagen"
+msgstr "Back to cart"
+
+msgid "Toevoegen"
+msgstr "Add to cart"
+
+msgid "Totaal ontvangen"
+msgstr "Total received"
+
+msgid "Totaal"
+msgstr "Total"
+
+msgid "Uitloggen"
+msgstr "Log out"
+
+msgid "Uitverkocht"
+msgstr "Sold out"
+
+msgid "Veilig en versleuteld betalen"
+msgstr "Safe and encrypted payment"
+
+msgid "Verder naar betalen →"
+msgstr "Continue to payment →"
+
+msgid "Verder winkelen"
+msgstr "Continue shopping"
+
+msgid "Verkeerd email of wachtwoord!"
+msgstr "Incorrect email or password!"
+
+msgid "Verwijder"
+msgstr "Delete"
+
+msgid "Verzending"
+msgstr "Shipping"
+
+msgid "Verzendkosten"
+msgstr "Shipping costs"
+
+msgid "Verzendmethode"
+msgstr "Shipping method"
+
+msgid "Voeg er één toe"
+msgstr "Add one"
+
+msgid "Volg onze reis"
+msgstr "Follow our journey"
+
+msgid "Voornaam Achternaam"
+msgstr "First Last"
+
+msgid "Voorraad"
+msgstr "Stock"
+
+msgid "Vul een bedrag in."
+msgstr "Please enter an amount."
+
+msgid "Vul een geldig bedrag in."
+msgstr "Please enter a valid amount."
+
+msgid "Vul een geldig e-mailadres in."
+msgstr "Please enter a valid email address."
+
+msgid "Vul je e-mailadres in en we sturen je een resetlink."
+msgstr "Enter your email address and we will send you a reset link."
+
+msgid "Vul je ordernummer en e-mailadres in om je bestelling te bekijken"
+msgstr "Enter your order number and email address to view your order"
+
+msgid "Vul zowel je ordernummer als e-mailadres in."
+msgstr "Please enter both your order number and email address."
+
+msgid "Wachtwoord instellen"
+msgstr "Set password"
+
+msgid "Wachtwoord moet minimaal 6 tekens zijn."
+msgstr "Password must be at least 6 characters."
+
+msgid "Wachtwoord succesvol gewijzigd! Je kan nu inloggen."
+msgstr "Password successfully changed! You can now log in."
+
+msgid "Wachtwoord vergeten?"
+msgstr "Forgot password?"
+
+msgid "Wachtwoord vergeten"
+msgstr "Forgot password"
+
+msgid "Wachtwoord"
+msgstr "Password"
+
+msgid "Wachtwoorden komen niet overeen!"
+msgstr "Passwords do not match!"
+
+msgid "Wachtwoorden komen niet overeen."
+msgstr "Passwords do not match."
+
+msgid "wagen"
+msgstr "cart"
+
+msgid "Wat doen wij?"
+msgstr "What do we do?"
+
+msgid "Welkom"
+msgstr "Welcome"
+
+msgid "Wereldwijde impact"
+msgstr "Worldwide impact"
+
+msgid "Wie zijn wij?"
+msgstr "Who are we?"
+
+msgid "Wij geloven dat elk kind recht heeft op een veilige en gelukkige jeugd."
+msgstr "We believe every child deserves a safe and happy childhood."
+
+msgid "Wijzig"
+msgstr "Edit"
+
+msgid "wijzigen"
+msgstr "edit"
+
+msgid "Winkel"
+msgstr "Shop"
+
+msgid "Winkelwagen"
+msgstr "Cart"
+
+msgid "Wis zoekopdracht"
+msgstr "Clear search"
+
+msgid "Zoek producten..."
+msgstr "Search products..."
+
+msgid "Zoek producten"
+msgstr "Search products"
+
+msgid "Zoeken"
+msgstr "Search"
+
+msgid "Met elke aankoop steun je kinderen getroffen door oorlog over de hele wereld — samen geven we hen vleugels."
+msgstr "With every purchase you support children affected by war around the world — together we give them wings."
+
+msgid "Eén uur is genoeg om de dag van een kind te veranderen. Door spel, muziek en creatieve activiteiten creëren we veilige ruimtes waar kinderen zich vrij voelen."
+msgstr "One hour is enough to change a child's day. Through play, music and creative activities we create safe spaces where children feel free."
+
+msgid "Little Wings is een initiatief dat kinderen in moeilijke situaties ondersteunt. Wij geloven dat creativiteit, kunst en muziek helpen bij het helen van trauma's."
+msgstr "Little Wings is an initiative that supports children in difficult situations. We believe that creativity, art and music help heal trauma."
+
+msgid "Elke aankoop gaat rechtstreeks naar kinderen die getroffen zijn door oorlog over de hele wereld."
+msgstr "Every purchase goes directly to children affected by war around the world."
+
+msgid "Blijf op de hoogte van onze missie en ontdek hoe jij kunt bijdragen"
+msgstr "Stay updated on our mission and discover how you can contribute"

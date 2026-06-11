@@ -1,0 +1,953 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-06-11 16:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app/blueprints/admin.py:53
+#, python-format
+msgid "Product \"%(naam)s\" toegevoegd!"
+msgstr ""
+
+#: app/blueprints/admin.py:71
+#, python-format
+msgid "Product \"%(naam)s\" bijgewerkt!"
+msgstr ""
+
+#: app/blueprints/admin.py:82
+#, python-format
+msgid "Product \"%(naam)s\" verwijderd."
+msgstr ""
+
+#: app/blueprints/admin.py:92
+#, python-format
+msgid "\"%(naam)s\" terug op voorraad gezet (10 stuks)."
+msgstr ""
+
+#: app/blueprints/admin.py:95
+#, python-format
+msgid "\"%(naam)s\" gemarkeerd als uitverkocht."
+msgstr ""
+
+#: app/blueprints/admin.py:147
+msgid "Order verwijderd."
+msgstr ""
+
+#: app/blueprints/auth.py:27
+msgid "Je bent nu uitgelogd!"
+msgstr ""
+
+#: app/blueprints/auth.py:39
+msgid "Succesvol ingelogd."
+msgstr ""
+
+#: app/blueprints/auth.py:41
+msgid "Verkeerd email of wachtwoord!"
+msgstr ""
+
+#: app/blueprints/auth.py:54
+msgid "Wachtwoorden komen niet overeen!"
+msgstr ""
+
+#: app/blueprints/auth.py:59
+msgid "Gebruikersnaam is al in gebruik!"
+msgstr ""
+
+#: app/blueprints/auth.py:62
+msgid "Email is al in gebruik!"
+msgstr ""
+
+#: app/blueprints/auth.py:67
+msgid "Dank voor de registratie. Je kan nu inloggen!"
+msgstr ""
+
+#: app/blueprints/auth.py:106
+msgid "Als er een account bestaat met dit e-mailadres, ontvang je een resetlink."
+msgstr ""
+
+#: app/blueprints/auth.py:115
+msgid "Deze resetlink is ongeldig of verlopen."
+msgstr ""
+
+#: app/blueprints/auth.py:121
+msgid "Wachtwoord moet minimaal 6 tekens zijn."
+msgstr ""
+
+#: app/blueprints/auth.py:124
+msgid "Wachtwoorden komen niet overeen."
+msgstr ""
+
+#: app/blueprints/auth.py:128
+msgid "Gebruiker niet gevonden."
+msgstr ""
+
+#: app/blueprints/auth.py:132
+msgid "Wachtwoord succesvol gewijzigd! Je kan nu inloggen."
+msgstr ""
+
+#: app/blueprints/shop.py:32 app/blueprints/shop.py:47
+#, python-format
+msgid "Niet genoeg voorraad! Er zijn nog maar %(n)d stuks beschikbaar."
+msgstr ""
+
+#: app/blueprints/shop.py:36
+msgid "Product toegevoegd aan je winkelwagen! 🛒"
+msgstr ""
+
+#: app/blueprints/shop.py:116
+#, python-format
+msgid "%(label)s is verplicht."
+msgstr ""
+
+#: app/blueprints/shop.py:119
+msgid "Vul een geldig e-mailadres in."
+msgstr ""
+
+#: app/blueprints/shop.py:168
+msgid "Geen bestelgegevens gevonden. Vul het formulier opnieuw in."
+msgstr ""
+
+#: app/blueprints/shop.py:227
+#, python-format
+msgid "Order geplaatst, bedankt %(naam)s! 🎉"
+msgstr ""
+
+#: app/blueprints/shop.py:239
+msgid "Vul een bedrag in."
+msgstr ""
+
+#: app/blueprints/shop.py:244
+msgid "Vul een geldig bedrag in."
+msgstr ""
+
+#: app/blueprints/shop.py:259
+msgid "Geen donatie gevonden. Vul het formulier opnieuw in."
+msgstr ""
+
+#: app/blueprints/shop.py:273
+msgid "Geen donatie gevonden."
+msgstr ""
+
+#: app/blueprints/shop.py:282
+#, python-format
+msgid "Dankjewel %(naam)s! 💜"
+msgstr ""
+
+#: app/blueprints/shop.py:300
+msgid "Geen bestelling gevonden met dit ordernummer en e-mailadres."
+msgstr ""
+
+#: app/blueprints/shop.py:302
+msgid "Vul zowel je ordernummer als e-mailadres in."
+msgstr ""
+
+#: app/templates/admin.html:12
+msgid "beheerPanel"
+msgstr ""
+
+#: app/templates/admin.html:19 app/templates/admin.html:51
+#: app/templates/admin.html:217 app/templates/bestelling_status.html:101
+msgid "Producten"
+msgstr ""
+
+#: app/templates/admin.html:23 app/templates/admin.html:52
+msgid "Orders"
+msgstr ""
+
+#: app/templates/admin.html:27 app/templates/admin.html:134
+#: app/templates/admin.html:148 app/templates/shop.html:55
+#: app/templates/shop.html:77
+msgid "Uitverkocht"
+msgstr ""
+
+#: app/templates/admin.html:31 app/templates/admin.html:53
+msgid "Donaties"
+msgstr ""
+
+#: app/templates/admin.html:40
+msgid "Lage voorraad"
+msgstr ""
+
+#: app/templates/admin.html:43
+msgid "nog"
+msgstr ""
+
+#: app/templates/admin.html:43
+msgid "stuk"
+msgstr ""
+
+#: app/templates/admin.html:43
+msgid "over"
+msgstr ""
+
+#: app/templates/admin.html:54
+msgid "Nieuw product"
+msgstr ""
+
+#: app/templates/admin.html:60
+msgid "Alle producten"
+msgstr ""
+
+#: app/templates/admin.html:67 app/templates/admin.html:86
+#: app/templates/admin.html:266 app/templates/bestelling_status.html:61
+#: app/templates/doneer.html:15 app/templates/winkelwagen.html:98
+msgid "Naam"
+msgstr ""
+
+#: app/templates/admin.html:68 app/templates/admin.html:90
+#: app/templates/admin.html:314
+msgid "Prijs"
+msgstr ""
+
+#: app/templates/admin.html:69 app/templates/admin.html:96
+#: app/templates/admin.html:318
+msgid "Voorraad"
+msgstr ""
+
+#: app/templates/admin.html:70
+msgid "Status"
+msgstr ""
+
+#: app/templates/admin.html:71
+msgid "Acties"
+msgstr ""
+
+#: app/templates/admin.html:81 app/templates/admin.html:221
+#: app/templates/bestelling_status.html:105
+msgid "Product"
+msgstr ""
+
+#: app/templates/admin.html:81
+msgid "wijzigen"
+msgstr ""
+
+#: app/templates/admin.html:100 app/templates/admin.html:323
+msgid "Foto uploaden"
+msgstr ""
+
+#: app/templates/admin.html:103
+msgid "Huidig"
+msgstr ""
+
+#: app/templates/admin.html:105
+msgid "Of bestandsnaam, bijv. hoodie.png"
+msgstr ""
+
+#: app/templates/admin.html:109 app/templates/admin.html:309
+msgid "Beschrijving"
+msgstr ""
+
+#: app/templates/admin.html:113
+msgid "Opslaan"
+msgstr ""
+
+#: app/templates/admin.html:114
+msgid "Annuleer"
+msgstr ""
+
+#: app/templates/admin.html:136
+msgid "Beschikbaar"
+msgstr ""
+
+#: app/templates/admin.html:141
+msgid "Wijzig"
+msgstr ""
+
+#: app/templates/admin.html:146
+msgid "Herstel"
+msgstr ""
+
+#: app/templates/admin.html:167
+msgid "Nog geen producten."
+msgstr ""
+
+#: app/templates/admin.html:167
+msgid "Voeg er één toe"
+msgstr ""
+
+#: app/templates/admin.html:177
+msgid "Alle orders"
+msgstr ""
+
+#: app/templates/admin.html:179
+msgid "Exporteer CSV"
+msgstr ""
+
+#: app/templates/admin.html:188
+msgid "Order"
+msgstr ""
+
+#: app/templates/admin.html:196
+msgid "Nieuw"
+msgstr ""
+
+#: app/templates/admin.html:199
+msgid "Verwijder"
+msgstr ""
+
+#: app/templates/admin.html:207
+msgid "Klantgegevens"
+msgstr ""
+
+#: app/templates/admin.html:222 app/templates/bestelling_status.html:106
+msgid "Aantal"
+msgstr ""
+
+#: app/templates/admin.html:223
+msgid "Stukprijs"
+msgstr ""
+
+#: app/templates/admin.html:224 app/templates/bestelling_status.html:107
+#: app/templates/winkelwagen.html:78
+msgid "Subtotaal"
+msgstr ""
+
+#: app/templates/admin.html:230 app/templates/bestelling_status.html:113
+msgid "(verwijderd)"
+msgstr ""
+
+#: app/templates/admin.html:239 app/templates/bestelling_status.html:124
+#: app/templates/betaal_bestelling.html:38 app/templates/winkelwagen.html:86
+msgid "Totaal"
+msgstr ""
+
+#: app/templates/admin.html:251
+msgid "Nog geen orders."
+msgstr ""
+
+#: app/templates/admin.html:259
+msgid "Alle donaties"
+msgstr ""
+
+#: app/templates/admin.html:267
+msgid "E-mail"
+msgstr ""
+
+#: app/templates/admin.html:268
+msgid "Bedrag"
+msgstr ""
+
+#: app/templates/admin.html:269
+msgid "Bericht"
+msgstr ""
+
+#: app/templates/admin.html:270
+msgid "Datum"
+msgstr ""
+
+#: app/templates/admin.html:285
+msgid "Totaal ontvangen"
+msgstr ""
+
+#: app/templates/admin.html:293
+msgid "Er zijn nog geen donaties ontvangen."
+msgstr ""
+
+#: app/templates/admin.html:301
+msgid "Nieuw product toevoegen"
+msgstr ""
+
+#: app/templates/admin.html:305
+msgid "Productnaam"
+msgstr ""
+
+#: app/templates/admin.html:306
+msgid "bijv. Gano7 Hoodie"
+msgstr ""
+
+#: app/templates/admin.html:310
+msgid "Omschrijving van het product…"
+msgstr ""
+
+#: app/templates/admin.html:325
+msgid "Of vul een bestaande bestandsnaam in"
+msgstr ""
+
+#: app/templates/admin.html:326
+msgid "bijv. hoodie.png"
+msgstr ""
+
+#: app/templates/admin.html:329
+msgid "Product toevoegen"
+msgstr ""
+
+#: app/templates/base.html:35 app/templates/home.html:3
+msgid "Home"
+msgstr ""
+
+#: app/templates/base.html:36 app/templates/over_ons.html:3
+msgid "Over ons"
+msgstr ""
+
+#: app/templates/base.html:37 app/templates/shop.html:3
+#: app/templates/shop.html:15
+msgid "Shop"
+msgstr ""
+
+#: app/templates/base.html:38
+msgid "Mijn bestelling"
+msgstr ""
+
+#: app/templates/base.html:48 app/templates/doneer.html:3
+#: app/templates/doneer.html:11
+msgid "Doneer"
+msgstr ""
+
+#: app/templates/base.html:50
+msgid "Uitloggen"
+msgstr ""
+
+#: app/templates/bestelling_status.html:3
+msgid "Bestellingstatus"
+msgstr ""
+
+#: app/templates/bestelling_status.html:14
+#: app/templates/betaal_bestelling.html:12
+msgid "Jouw bestelling"
+msgstr ""
+
+#: app/templates/bestelling_status.html:15
+#: app/templates/bestelling_status.html:57
+msgid "Bestelling"
+msgstr ""
+
+#: app/templates/bestelling_status.html:15
+msgid "opzoeken"
+msgstr ""
+
+#: app/templates/bestelling_status.html:16
+msgid "Vul je ordernummer en e-mailadres in om je bestelling te bekijken"
+msgstr ""
+
+#: app/templates/bestelling_status.html:27
+msgid "Ordernummer"
+msgstr ""
+
+#: app/templates/bestelling_status.html:33
+msgid "bijv. 42"
+msgstr ""
+
+#: app/templates/bestelling_status.html:40
+#: app/templates/bestelling_status.html:65 app/templates/doneer.html:18
+#: app/templates/wachtwoord_vergeten.html:23 app/templates/welcome.html:56
+#: app/templates/welcome.html:69 app/templates/winkelwagen.html:101
+msgid "E-mailadres"
+msgstr ""
+
+#: app/templates/bestelling_status.html:46
+#: app/templates/wachtwoord_vergeten.html:29 app/templates/welcome.html:57
+#: app/templates/welcome.html:70 app/templates/winkelwagen.html:102
+msgid "jouw@email.nl"
+msgstr ""
+
+#: app/templates/bestelling_status.html:51
+msgid "Bestelling opzoeken"
+msgstr ""
+
+#: app/templates/bestelling_status.html:69
+msgid "Besteldatum"
+msgstr ""
+
+#: app/templates/bestelling_status.html:73 app/templates/winkelwagen.html:124
+msgid "Verzendmethode"
+msgstr ""
+
+#: app/templates/bestelling_status.html:76
+msgid "Express (€4,99)"
+msgstr ""
+
+#: app/templates/bestelling_status.html:78
+msgid "Ophalen"
+msgstr ""
+
+#: app/templates/bestelling_status.html:80
+msgid "Standaard (gratis)"
+msgstr ""
+
+#: app/templates/bestelling_status.html:85
+#: app/templates/betaal_bestelling.html:55 app/templates/betaal_donatie.html:31
+msgid "Betaalmethode"
+msgstr ""
+
+#: app/templates/bestelling_status.html:92
+msgid "Bezorgadres"
+msgstr ""
+
+#: app/templates/bestelling_status.html:120 app/templates/winkelwagen.html:82
+msgid "Verzendkosten"
+msgstr ""
+
+#: app/templates/bestelling_status.html:121
+msgid "€ 4,99"
+msgstr ""
+
+#: app/templates/bestelling_status.html:121
+msgid "Gratis"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:2 app/templates/betaal_donatie.html:2
+msgid "Betalen"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:13 app/templates/betaal_donatie.html:13
+msgid "Controleer je gegevens en kies een betaalmethode"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:33
+msgid "Verzending"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:63 app/templates/betaal_donatie.html:40
+msgid "Betaal via jouw bank"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:81 app/templates/betaal_donatie.html:60
+msgid "Betaal met je PayPal account"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:89
+msgid "Betaal"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:94
+msgid "Terug naar winkelwagen"
+msgstr ""
+
+#: app/templates/betaal_bestelling.html:97 app/templates/betaal_donatie.html:76
+msgid "Veilig en versleuteld betalen"
+msgstr ""
+
+#: app/templates/betaal_donatie.html:12
+msgid "Jouw donatie"
+msgstr ""
+
+#: app/templates/betaal_donatie.html:68
+msgid "Bevestig donatie van"
+msgstr ""
+
+#: app/templates/betaal_donatie.html:73
+msgid "Terug naar donatiepagina"
+msgstr ""
+
+#: app/templates/doneer.html:21
+msgid "Bepaal zelf jouw bijdrage 💜"
+msgstr ""
+
+#: app/templates/doneer.html:24
+msgid "bijv. 15"
+msgstr ""
+
+#: app/templates/doneer.html:27
+msgid "Bericht (optioneel) 💬"
+msgstr ""
+
+#: app/templates/doneer.html:28
+msgid "Schrijf hier een berichtje..."
+msgstr ""
+
+#: app/templates/doneer.html:30 app/templates/winkelwagen.html:133
+msgid "Verder naar betalen →"
+msgstr ""
+
+#: app/templates/home.html:17
+msgid ""
+"Koop een shirt, steun een kind. Elke aankoop gaat rechtstreeks naar "
+"kinderen die getroffen zijn door oorlog over de hele wereld."
+msgstr ""
+
+#: app/templates/home.html:19 app/templates/over_ons.html:35
+msgid "Bekijk de collectie"
+msgstr ""
+
+#: app/templates/home.html:20 app/templates/over_ons.html:39
+msgid "Doneer direct"
+msgstr ""
+
+#: app/templates/home.html:27
+msgid "100% winst naar kinderen"
+msgstr ""
+
+#: app/templates/home.html:28
+msgid "Gratis verzending"
+msgstr ""
+
+#: app/templates/home.html:29
+msgid "Duurzame materialen"
+msgstr ""
+
+#: app/templates/home.html:30
+msgid "Wereldwijde impact"
+msgstr ""
+
+#: app/templates/home.html:35
+msgid "Onze missie"
+msgstr ""
+
+#: app/templates/home.html:36
+msgid "Wij geloven dat elk kind recht heeft op een veilige en gelukkige jeugd."
+msgstr ""
+
+#: app/templates/login.html:2 app/templates/login.html:8
+#: app/templates/welcome.html:50 app/templates/welcome.html:60
+msgid "Inloggen"
+msgstr ""
+
+#: app/templates/over_ons.html:20
+msgid "Wie zijn wij?"
+msgstr ""
+
+#: app/templates/over_ons.html:21
+msgid ""
+"Little Wings is een initiatief dat kinderen in moeilijke situaties "
+"ondersteunt. Wij geloven dat creativiteit, kunst en muziek helpen bij het"
+" helen van trauma's."
+msgstr ""
+
+#: app/templates/over_ons.html:26
+msgid "Wat doen wij?"
+msgstr ""
+
+#: app/templates/over_ons.html:27
+msgid ""
+"Eén uur is genoeg om de dag van een kind te veranderen. Door spel, muziek"
+" en creatieve activiteiten creëren we veilige ruimtes waar kinderen zich "
+"vrij voelen."
+msgstr ""
+
+#: app/templates/over_ons.html:31
+msgid "Steun ons"
+msgstr ""
+
+#: app/templates/over_ons.html:32
+msgid "Koop een shirt, steun een kind."
+msgstr ""
+
+#: app/templates/over_ons.html:32
+msgid ""
+"Elke aankoop gaat rechtstreeks naar kinderen die getroffen zijn door "
+"oorlog over de hele wereld."
+msgstr ""
+
+#: app/templates/over_ons.html:47
+msgid "Volg onze reis"
+msgstr ""
+
+#: app/templates/over_ons.html:48
+msgid "Blijf op de hoogte van onze missie en ontdek hoe jij kunt bijdragen"
+msgstr ""
+
+#: app/templates/register.html:2 app/templates/register.html:8
+#: app/templates/welcome.html:51
+msgid "Registreren"
+msgstr ""
+
+#: app/templates/shop.html:14
+msgid "Onze collectie"
+msgstr ""
+
+#: app/templates/shop.html:16
+msgid "Elk product draagt bij aan onze missie - samen sterker"
+msgstr ""
+
+#: app/templates/shop.html:23
+msgid "Zoek producten..."
+msgstr ""
+
+#: app/templates/shop.html:25
+msgid "Zoek producten"
+msgstr ""
+
+#: app/templates/shop.html:27
+msgid "Zoeken"
+msgstr ""
+
+#: app/templates/shop.html:33
+#, python-format
+msgid "%(n)d resultaat voor"
+msgid_plural "%(n)d resultaten voor"
+msgstr[0] ""
+msgstr[1] ""
+
+#: app/templates/shop.html:36
+#, python-format
+msgid "Geen producten gevonden voor \"%(term)s\""
+msgstr ""
+
+#: app/templates/shop.html:38
+msgid "Wis zoekopdracht"
+msgstr ""
+
+#: app/templates/shop.html:53
+msgid "Bijna op!"
+msgstr ""
+
+#: app/templates/shop.html:79
+msgid "Toevoegen"
+msgstr ""
+
+#: app/templates/shop.html:90
+msgid "Er zijn nog geen producten beschikbaar."
+msgstr ""
+
+#: app/templates/shop.html:100
+msgid "Elke aankoop telt"
+msgstr ""
+
+#: app/templates/shop.html:101
+msgid ""
+"De opbrengst van de shop gaat direct naar onze projecten voor kinderen en"
+" jongeren."
+msgstr ""
+
+#: app/templates/shop.html:103
+msgid "Doneer ook"
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:3
+msgid "Nieuw wachtwoord instellen"
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:13
+#: app/templates/wachtwoord_reset.html:21
+msgid "Nieuw wachtwoord"
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:14
+msgid "Kies een sterk wachtwoord van minimaal 6 tekens."
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:27
+msgid "Minimaal 6 tekens"
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:35 app/templates/welcome.html:73
+msgid "Bevestig wachtwoord"
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:41 app/templates/welcome.html:74
+msgid "Herhaal je wachtwoord"
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:48
+msgid "Wachtwoord instellen"
+msgstr ""
+
+#: app/templates/wachtwoord_reset.html:53
+#: app/templates/wachtwoord_vergeten.html:41
+msgid "Terug naar inloggen"
+msgstr ""
+
+#: app/templates/wachtwoord_vergeten.html:3
+#: app/templates/wachtwoord_vergeten.html:13
+msgid "Wachtwoord vergeten"
+msgstr ""
+
+#: app/templates/wachtwoord_vergeten.html:15
+msgid "Vul je e-mailadres in en we sturen je een resetlink."
+msgstr ""
+
+#: app/templates/wachtwoord_vergeten.html:36
+msgid "Stuur resetlink"
+msgstr ""
+
+#: app/templates/welcome.html:7
+msgid "Welkom"
+msgstr ""
+
+#: app/templates/welcome.html:39
+msgid ""
+"Met elke aankoop steun je kinderen getroffen door oorlog over de hele "
+"wereld — samen geven we hen vleugels."
+msgstr ""
+
+#: app/templates/welcome.html:58 app/templates/welcome.html:71
+msgid "Wachtwoord"
+msgstr ""
+
+#: app/templates/welcome.html:62
+msgid "Wachtwoord vergeten?"
+msgstr ""
+
+#: app/templates/welcome.html:67
+msgid "Gebruikersnaam"
+msgstr ""
+
+#: app/templates/welcome.html:68
+msgid "Jouw gebruikersnaam"
+msgstr ""
+
+#: app/templates/welcome.html:72
+msgid "Kies een wachtwoord"
+msgstr ""
+
+#: app/templates/welcome.html:75
+msgid "Account aanmaken"
+msgstr ""
+
+#: app/templates/winkelwagen.html:3
+msgid "Winkelwagen"
+msgstr ""
+
+#: app/templates/winkelwagen.html:14
+msgid "Jouw selectie"
+msgstr ""
+
+#: app/templates/winkelwagen.html:15
+msgid "Winkel"
+msgstr ""
+
+#: app/templates/winkelwagen.html:15
+msgid "wagen"
+msgstr ""
+
+#: app/templates/winkelwagen.html:16
+msgid "Bekijk en beheer je gekozen producten"
+msgstr ""
+
+#: app/templates/winkelwagen.html:72
+msgid "Verder winkelen"
+msgstr ""
+
+#: app/templates/winkelwagen.html:93
+msgid "Jouw gegevens"
+msgstr ""
+
+#: app/templates/winkelwagen.html:99
+msgid "Voornaam Achternaam"
+msgstr ""
+
+#: app/templates/winkelwagen.html:104
+msgid "Telefoonnummer"
+msgstr ""
+
+#: app/templates/winkelwagen.html:105
+msgid "bijv. 06 12345678"
+msgstr ""
+
+#: app/templates/winkelwagen.html:107
+msgid "Straat en huisnummer"
+msgstr ""
+
+#: app/templates/winkelwagen.html:108
+msgid "bijv. Hoofdstraat 12"
+msgstr ""
+
+#: app/templates/winkelwagen.html:110
+msgid "Postcode"
+msgstr ""
+
+#: app/templates/winkelwagen.html:111
+msgid "bijv. 1234 AB"
+msgstr ""
+
+#: app/templates/winkelwagen.html:113
+msgid "Stad"
+msgstr ""
+
+#: app/templates/winkelwagen.html:114
+msgid "bijv. Amsterdam"
+msgstr ""
+
+#: app/templates/winkelwagen.html:116
+msgid "Land"
+msgstr ""
+
+#: app/templates/winkelwagen.html:118
+msgid "Kies een land"
+msgstr ""
+
+#: app/templates/winkelwagen.html:119
+msgid "Nederland"
+msgstr ""
+
+#: app/templates/winkelwagen.html:120
+msgid "België"
+msgstr ""
+
+#: app/templates/winkelwagen.html:121
+msgid "Duitsland"
+msgstr ""
+
+#: app/templates/winkelwagen.html:126
+msgid "Kies verzending"
+msgstr ""
+
+#: app/templates/winkelwagen.html:127
+msgid "Standaard (3-5 dagen) — Gratis"
+msgstr ""
+
+#: app/templates/winkelwagen.html:128
+msgid "Express (1-2 dagen) — €4,99"
+msgstr ""
+
+#: app/templates/winkelwagen.html:129
+msgid "Ophalen — Gratis"
+msgstr ""
+
+#: app/templates/winkelwagen.html:141
+msgid "Je winkelwagen is leeg."
+msgstr ""
+
+#: app/templates/errors/404.html:14 app/templates/errors/500.html:14
+#: app/templates/winkelwagen.html:142
+msgid "Naar de shop"
+msgstr ""
+
+#: app/templates/errors/403.html:2 app/templates/errors/403.html:8
+msgid "Geen toegang"
+msgstr ""
+
+#: app/templates/errors/403.html:10
+msgid "Je hebt geen toestemming om deze pagina te bekijken."
+msgstr ""
+
+#: app/templates/errors/403.html:11
+msgid "Log in als admin om hier toegang toe te krijgen."
+msgstr ""
+
+#: app/templates/errors/403.html:14 app/templates/errors/404.html:15
+#: app/templates/errors/500.html:15
+msgid "Terug naar home"
+msgstr ""
+
+#: app/templates/errors/404.html:2 app/templates/errors/404.html:8
+msgid "Pagina niet gevonden"
+msgstr ""
+
+#: app/templates/errors/404.html:10
+msgid "Deze pagina bestaat niet of is verplaatst."
+msgstr ""
+
+#: app/templates/errors/404.html:11
+msgid "Misschien vloog ze weg op haar eigen vleugels."
+msgstr ""
+
+#: app/templates/errors/500.html:2
+msgid "Serverfout"
+msgstr ""
+
+#: app/templates/errors/500.html:8
+msgid "Er ging iets mis"
+msgstr ""
+
+#: app/templates/errors/500.html:10
+msgid "Er is een onverwachte fout opgetreden aan onze kant."
+msgstr ""
+
+#: app/templates/errors/500.html:11
+msgid "Probeer het opnieuw of kom later terug."
+msgstr ""
+
