@@ -18,7 +18,7 @@
 
 ---
 
-## 🌸 Over het project
+##  Over het project
 
 Little Wings is een initiatief dat kinderen in moeilijke situaties ondersteunt. Wij geloven dat creativiteit, kunst en muziek helpen bij het helen van trauma's. Door spel, muziek en creatieve activiteiten creëren we veilige ruimtes waar kinderen zich vrij voelen.
 
@@ -26,27 +26,27 @@ Little Wings is een initiatief dat kinderen in moeilijke situaties ondersteunt. 
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🛍️ **Webshop** — Browse en bestel producten uit de Little Wings collectie
-- 🔍 **Zoekfunctie** — Zoek producten op naam of beschrijving direct in de shop
-- 🛒 **Winkelwagen** — Voeg producten toe, pas aantallen aan en beheer je bestelling
-- 💳 **Checkout met validatie** — Serverside validatie van alle adresvelden en e-mailformaat
-- 📦 **Bestellingstatus** — Klanten kunnen hun bestelling terugzoeken via ordernummer en e-mail
-- 📧 **Bevestigingsmail** — Klant ontvangt automatisch een HTML-mail na bestelling
-- 🔑 **Wachtwoord reset** — Vergeten wachtwoord resetten via een beveiligde e-maillink
-- 🌍 **Meertaligheid** — Volledige NL/EN taalwissel via één knop in de navigatiebalk
-- ❤️ **Donaties** — Doneer direct via een eenvoudig formulier
-- 👤 **Gebruikersaccounts** — Registreer en log in om bestellingen te plaatsen
-- 🔐 **Admin dashboard** — Beheer producten (inclusief foto-upload), bestellingen en donaties
-- 🖼️ **Foto-upload** — Upload productfoto's direct vanuit het admin dashboard
-- 🐳 **Docker-ondersteuning** — Start de volledige app met één commando
-- 🔒 **CSRF-beveiliging** — Alle formulieren zijn beveiligd tegen cross-site request forgery
-- 📱 **Responsief design** — Werkt op desktop en mobiel
+- **Webshop** — Browse en bestel producten uit de Little Wings collectie
+-  **Zoekfunctie** — Zoek producten op naam of beschrijving direct in de shop
+-  **Winkelwagen** — Voeg producten toe, pas aantallen aan en beheer je bestelling
+-  **Checkout met validatie** — Serverside validatie van alle adresvelden en e-mailformaat
+-  **Bestellingstatus** — Klanten kunnen hun bestelling terugzoeken via ordernummer en e-mail
+-  **Bevestigingsmail** — Klant ontvangt automatisch een HTML-mail na bestelling
+-  **Wachtwoord reset** — Vergeten wachtwoord resetten via een beveiligde e-maillink
+-  **Meertaligheid** — Volledige NL/EN taalwissel via één knop in de navigatiebalk
+-  **Donaties** — Doneer direct via een eenvoudig formulier
+-  **Gebruikersaccounts** — Registreer en log in om bestellingen te plaatsen
+-  **Admin dashboard** — Beheer producten (inclusief foto-upload), bestellingen en donaties
+-  **Foto-upload** — Upload productfoto's direct vanuit het admin dashboard
+-  **Docker-ondersteuning** — Start de volledige app met één commando
+-  **CSRF-beveiliging** — Alle formulieren zijn beveiligd tegen cross-site request forgery
+-  **Responsief design** — Werkt op desktop en mobiel
 
 ---
 
-## 🚀 Opstarten met Docker (aanbevolen)
+##  Opstarten met Docker (aanbevolen)
 
 ### Vereisten
 
@@ -94,7 +94,7 @@ docker compose exec web python db.py   # Herseed de database
 
 ---
 
-## 💻 Lokaal opstarten (zonder Docker)
+##  Lokaal opstarten (zonder Docker)
 
 ### Vereisten
 
@@ -117,7 +117,7 @@ De app is nu beschikbaar op [http://localhost:5000](http://localhost:5000).
 
 ---
 
-## 🔧 Omgevingsvariabelen
+##  Omgevingsvariabelen
 
 Kopieer `.env.example` naar `.env` en vul de waarden in:
 
@@ -136,7 +136,7 @@ Kopieer `.env.example` naar `.env` en vul de waarden in:
 
 ---
 
-## 🗂️ Projectstructuur
+##  Projectstructuur
 
 ```
 Littlewings/
@@ -187,7 +187,7 @@ Littlewings/
 
 ---
 
-## 🗄️ Database modellen
+##  Database modellen
 
 | Model | Beschrijving |
 |---|---|
@@ -199,7 +199,7 @@ Littlewings/
 
 ---
 
-## 🛠️ Technologieën
+##  Technologieën
 
 | Technologie | Gebruik |
 |---|---|
@@ -216,7 +216,7 @@ Littlewings/
 
 ---
 
-## 📋 Changelog
+##  Changelog
 
 ### Recente verbeteringen
 
@@ -275,16 +275,16 @@ Littlewings/
 
 ---
 
-## 🌍 Onze impact
+##  Onze impact
 
-- 💚 **100% van de winst** gaat naar kinderen in oorlogsgebieden
-- 🌱 **Duurzame materialen** in alle producten
-- 🚚 **Gratis verzending** op standaard bestellingen
-- 🌐 **Wereldwijde impact** — elk klein gebaar telt
+-  **100% van de winst** gaat naar kinderen in oorlogsgebieden
+-  **Duurzame materialen** in alle producten
+-  **Gratis verzending** op standaard bestellingen
+-  **Wereldwijde impact** — elk klein gebaar telt
 
 ---
 
-## 📱 Volg ons
+##  Volg ons
 
 Blijf op de hoogte van onze missie en zie hoe jouw steun het verschil maakt:
 
@@ -292,7 +292,7 @@ Blijf op de hoogte van onze missie en zie hoe jouw steun het verschil maakt:
 
 ---
 
-## 🤝 Bijdragen
+##  Bijdragen
 
 Wil je meehelpen? Pull requests zijn welkom! Voor grote wijzigingen, open eerst een issue om te bespreken wat je wilt veranderen.
 
